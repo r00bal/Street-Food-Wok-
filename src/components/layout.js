@@ -8,9 +8,19 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import styled from 'styled-components'
 
 import Header from "./header"
 import "./layout.css"
+
+
+const Main = styled.main`
+width: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+align-content: center;
+`
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -34,7 +44,7 @@ const Layout = ({ children }) => {
           paddingTop: 0,
         }}
       >
-        <main>{children}</main>
+        <Main>{children}</Main>
         <footer>
           © {new Date().getFullYear()}, Built with
           {` `}
