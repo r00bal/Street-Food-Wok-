@@ -12,6 +12,7 @@ import styled from 'styled-components'
 import GlobalStyle from '../Global'
 import Header from "./header"
 import Navigation from '../components/layouts/Navigation.js'
+import Footer from '../components/layouts/Footer.js'
 
 const Main = styled.main`
 width: 100%;
@@ -27,6 +28,7 @@ const Layout = ({ children }) => {
       site {
         siteMetadata {
           title
+          author
         }
       }
     }
@@ -47,13 +49,9 @@ const Layout = ({ children }) => {
         <Navigation stick={true} />
         <Navigation />
         <Main>{children}</Main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
 
-        </footer>
       </div>
+      <Footer siteAuthor={data.site.siteMetadata.author} />
     </>
   )
 }
