@@ -16,7 +16,7 @@ const pages = [
     { name: 'find us', path: 'findus', img: localisation }
 ]
 
-const StyledLinkStylesIfStick = css`
+const StyledLinkStylesIfStatic = css`
 text-decoration: none;
        text-transform: uppercase;
        position:relative;
@@ -46,7 +46,7 @@ text-decoration: none;
         }
 `
 
-const StyledLinkStylesIfStatic = css`
+const StyledLinkStylesIfStick = css`
        text-decoration: none;
        text-transform: uppercase;
        position:relative;
@@ -75,7 +75,7 @@ const StyledLink = styled(Link)`
        ${({ stick }) => stick ? StyledLinkStylesIfStatic : StyledLinkStylesIfStick};
 `
 
-const List = styled.li` 
+const ListStylesIfStick = css`
         list-style: none;
         font-size:3rem;
         padding:15px 10px;  
@@ -93,6 +93,17 @@ const List = styled.li`
         `}  
 `
 
+const ListStylesIfStatic = css`
+        list-style: none;
+        display: inline-block; 
+        font-size:1.2rem;   
+        padding:15px 10px;  
+`
+
+const List = styled.li` 
+         ${({ stick }) => stick ? ListStylesIfStick : ListStylesIfStatic};
+`
+
 const Navigation = ({ className, stick = false }) => {
 
     return (
@@ -100,7 +111,7 @@ const Navigation = ({ className, stick = false }) => {
             {console.log(stick)}
             {pages.map(({ name, img, path }) => {
                 return (
-                    <List>
+                    <List stick={stick}>
                         <StyledLink stick={stick}
                             to={`/${path}`}
                             activeClassName="active"
@@ -135,7 +146,7 @@ background: ${transparentBlack};
 `
 
 const NavStylesIfStatic = css`
-    background: none;
+    background: ${transparentBlack};
     width:100%;
     height:auto;
     ${absolute({ x: 0, y: 0, yProp: 'bottom', xProp: 'left' })};
@@ -148,21 +159,6 @@ const NavStylesIfStatic = css`
 `
 
 export default styled(Navigation)`
-   background: ${transparentBlack};
-   ${elevation[0]};
-    width:100%;
-    height:100vh;
-    ${({ stick }) => stick ? fixed() : absolute({ x: 0, y: 0, yProp: 'bottom', xProp: 'left' })};
-    padding: 10px 5%;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    ${
-    above.small`
-    flex-direction: row;
-    height:auto;
-    `}
+   ${({ stick }) => stick ? NavStylesIfStick : NavStylesIfStatic};
 `
 
