@@ -1,6 +1,7 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
+import { Heading } from './elements'
 
 const Header = ({ siteTitle }) => (
   <header
@@ -24,7 +25,7 @@ const Header = ({ siteTitle }) => (
             textDecoration: `none`,
           }}
         >
-          {siteTitle}
+          <Heading>{siteTitle}</Heading>
         </Link>
       </h1>
     </div>

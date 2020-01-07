@@ -9,17 +9,16 @@ import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import styled from 'styled-components'
-
+import GlobalStyle from '../Global'
 import Header from "./header"
-import "./layout.css"
-
+import Navigation from '../components/layouts/Navigation.js'
 
 const Main = styled.main`
 width: 100%;
 display: flex;
-justify-content: center;
-align-items: center;
-align-content: center;
+flex-flow: column nowrap;
+justify-content: space-around;
+align-items: space-around;
 `
 
 const Layout = ({ children }) => {
@@ -35,6 +34,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
+      <GlobalStyle />
       <Header siteTitle={data.site.siteMetadata.title} />
       <div
         style={{
@@ -44,11 +44,14 @@ const Layout = ({ children }) => {
           paddingTop: 0,
         }}
       >
+        <Navigation stick={true} />
+        <Navigation />
         <Main>{children}</Main>
         <footer>
           © {new Date().getFullYear()}, Built with
           {` `}
           <a href="https://www.gatsbyjs.org">Gatsby</a>
+
         </footer>
       </div>
     </>
