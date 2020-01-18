@@ -48,7 +48,7 @@ const Layout = ({ children, location, test, image, stick }) => {
           <Heading>WOK STREET FOOD</Heading>
         </Parallax>
       </Header>
-      {console.log(location.href)}
+      {console.log(location)}
 
 
       <Main>
