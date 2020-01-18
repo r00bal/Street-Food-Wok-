@@ -13,13 +13,36 @@ html {
   box-sizing: inherit;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
-  margin: 0;
-  padding: 75px 0 0;
+  height: 100%;
+  max-width: 100vw;
+    overflow-x: hidden;
+    font-size:16px;
   ${textFont};
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  #___gatsby {
+     display: flex;
+    height: 100%; 
+  flex-direction: column; 
+    #gatsby-focus-wrapper {
+      display: flex;
+      height: 100%;
+  flex-direction: column;
+    }
+  
+ 
+  }
+
+  }
+
 
 
 

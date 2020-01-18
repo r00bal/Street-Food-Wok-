@@ -10,19 +10,24 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import styled from 'styled-components'
 import GlobalStyle from '../Global'
-import Header from "./header"
+import Parallax from './hooks/Parallax'
+import { Container, Header, Heading } from './elements'
 import Navigation from '../components/layouts/Navigation.js'
 import Footer from '../components/layouts/Footer.js'
 
 const Main = styled.main`
 width: 100%;
+flex: 1 0 auto;
+`
+const LayoutContainer = styled(Container)`
 display: flex;
 flex-flow: column nowrap;
 justify-content: space-around;
 align-items: space-around;
+
 `
 
-const Layout = ({ children }) => {
+const Layout = ({ children, location, test, image, stick }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -37,20 +42,21 @@ const Layout = ({ children }) => {
   return (
     <>
       <GlobalStyle />
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0px 1.0875rem 1.45rem`,
-          paddingTop: 0,
-        }}
-      >
-        <Navigation stick={true} />
-        <Navigation />
-        <Main>{children}</Main>
+      {stick ? <Navigation stick="stick" /> : <Navigation />}
+      <Header image={image} >
+        <Parallax style={{ zIndex: '0' }}>
+          <Heading>WOK STREET FOOD</Heading>
+        </Parallax>
+      </Header>
+      {console.log(location.href)}
 
-      </div>
+
+      <Main>
+        <LayoutContainer>
+          {children}
+        </LayoutContainer>
+      </Main>
+
       <Footer siteAuthor={data.site.siteMetadata.author} />
     </>
   )

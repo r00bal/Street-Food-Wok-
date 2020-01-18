@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from "prop-types"
 import { Link } from 'gatsby'
 import book from '../assets/img/book.png'
 import delivery from '../assets/img/delivery.png'
@@ -57,7 +58,7 @@ const StyledLinkStylesIfStick = css`
        justify-content: flex-end;
        align-items:center;
         .LinkImg {
-            width:40px;
+            width:70px;
             visibility: visible; 
             padding-bottom:5px;     
             transition: transform .2s ease;  
@@ -69,7 +70,6 @@ const StyledLinkStylesIfStick = css`
             }
         }
 `
-//${({ stick }) => stick ? null : testStyles};
 
 const StyledLink = styled(Link)`
        ${({ stick }) => stick ? StyledLinkStylesIfStatic : StyledLinkStylesIfStick};
@@ -104,14 +104,12 @@ const List = styled.li`
          ${({ stick }) => stick ? ListStylesIfStick : ListStylesIfStatic};
 `
 
-const Navigation = ({ className, stick = false }) => {
-
+const Navigation = ({ className, stick }) => {
     return (
         <nav className={className}>
-            {console.log(stick)}
             {pages.map(({ name, img, path }) => {
                 return (
-                    <List stick={stick}>
+                    <List key={path} stick={stick}>
                         <StyledLink stick={stick}
                             to={`/${path}`}
                             activeClassName="active"
@@ -138,6 +136,7 @@ background: ${transparentBlack};
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    z-index: 999;
     ${
     above.small`
     flex-direction: row;
@@ -146,7 +145,7 @@ background: ${transparentBlack};
 `
 
 const NavStylesIfStatic = css`
-    background: ${transparentBlack};
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9));
     width:100%;
     height:auto;
     ${absolute({ x: 0, y: 0, yProp: 'bottom', xProp: 'left' })};
@@ -156,7 +155,16 @@ const NavStylesIfStatic = css`
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    z-index: 999;
 `
+
+// Navigation.propTypes = {
+//     stick: PropTypes.bool,
+// }
+
+// Navigation.defaultProps = {
+//     stick: false,
+// }
 
 export default styled(Navigation)`
    ${({ stick }) => stick ? NavStylesIfStick : NavStylesIfStatic};
