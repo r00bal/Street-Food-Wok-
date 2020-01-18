@@ -48,7 +48,7 @@ const Layout = ({ children, location, test, image, stick }) => {
           <Heading>WOK STREET FOOD</Heading>
         </Parallax>
       </Header>
-      {console.log(location.pathname)}
+      {location ? location.pathname === '/' ? <Navigation stick="stick" /> : null : null}
 
 
       <Main>
