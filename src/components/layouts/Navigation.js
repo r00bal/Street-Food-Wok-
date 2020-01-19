@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSpring, animated, config } from 'react-spring'
 import PropTypes from "prop-types"
 import { Link } from 'gatsby'
 import book from '../assets/img/book.png'
@@ -104,9 +105,10 @@ const List = styled.li`
          ${({ stick }) => stick ? ListStylesIfStick : ListStylesIfStatic};
 `
 
-const Navigation = ({ className, stick }) => {
+const Navigation = ({ className, stick, animation }) => {
+
     return (
-        <nav className={className}>
+        <animated.nav className={className} style={animation}>
             {pages.map(({ name, img, path }) => {
                 return (
                     <List key={path} stick={stick}>
@@ -121,7 +123,7 @@ const Navigation = ({ className, stick }) => {
                     </List>
                 )
             })}
-        </nav>
+        </animated.nav>
     )
 }
 const NavStylesIfStick = css`
@@ -158,13 +160,15 @@ const NavStylesIfStatic = css`
     z-index: 999;
 `
 
-// Navigation.propTypes = {
-//     stick: PropTypes.bool,
-// }
+Navigation.propTypes = {
+    stick: PropTypes.bool,
+    show: PropTypes.bool,
+}
 
-// Navigation.defaultProps = {
-//     stick: false,
-// }
+Navigation.defaultProps = {
+    stick: false,
+    show: false
+}
 
 export default styled(Navigation)`
    ${({ stick }) => stick ? NavStylesIfStick : NavStylesIfStatic};
