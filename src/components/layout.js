@@ -13,6 +13,7 @@ import GlobalStyle from '../Global'
 import { useSpring, config } from 'react-spring'
 import { Waypoint } from 'react-waypoint'
 import Parallax from './hooks/Parallax'
+import { useWindowSize } from './hooks/useWindowSize'
 import { Container, Header, Heading } from './elements'
 import { Navigation, Footer } from './layouts'
 import { DynamicQueryHeader } from './utilities'
@@ -39,23 +40,6 @@ const Layout = ({ children, location, headerTitle, stick }) => {
           author
         }
       }
-    #   datoCmsHeader(title: {eq: "Street Food Wok"}) {
-    #   title
-    #   headerImage {
-    #     path
-    #     url
-    #     fluid {
-    #       base64
-    #       tracedSVG
-    #       aspectRatio
-    #       width
-    #       height
-    #       src
-    #       srcSet
-    #       sizes
-    #     }
-    #   }
-    # }
     }
   `)
 
@@ -73,13 +57,13 @@ const Layout = ({ children, location, headerTitle, stick }) => {
     }, config: config.mass
 
   })
-
+  const size = useWindowSize();
   const title = DynamicQueryHeader(headerTitle) ? DynamicQueryHeader(headerTitle).title : null;
   const image = DynamicQueryHeader(headerTitle) ? DynamicQueryHeader(headerTitle).headerImage.fluid.src : null;
   return (
     <>
       <GlobalStyle />
-      {stick ? <Navigation stick="stick" /> : <Navigation />}
+      {stick || (size.width < 520) ? <Navigation stick={"stick"} /> : <Navigation />}
       <Header image={image} ref={refHeader}>
         <Parallax style={{ zIndex: '0' }}>
           <Heading>{title}</Heading>
@@ -87,23 +71,23 @@ const Layout = ({ children, location, headerTitle, stick }) => {
       </Header>
       {console.log(DynamicQueryHeader("Street Food Wok"))}
       {location ?
-        (location.pathname === '/') ? <Navigation stick="stick" animation={animation} /> : null
+        (location.pathname === '/') ? (size.width > 520) && <Navigation stick="stick" animation={animation} /> : null
         : null
       }
       <Waypoint
         topOffset='-25px'
         onEnter={
           () => {
-            console.log('hide')
+
             toggle(false)
-            console.log(on)
+
           }
         }
         onLeave={
           () => {
-            console.log('show')
+
             toggle(true)
-            console.log(on)
+
           }
         }
       />
