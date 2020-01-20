@@ -56,7 +56,7 @@ const Footer = ({ siteAuthor, className }) => (
 
         {pages.map(({ name }) => {
           return (
-            <LinkFooter to='/'>
+            <LinkFooter to='/' key={name}>
               {name}
             </LinkFooter>
           )

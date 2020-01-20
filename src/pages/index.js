@@ -1,9 +1,7 @@
 import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
-import { Card, Header, Heading, Button, LinkButton } from '../components/elements'
+import { Card, Heading, Button, LinkButton } from '../components/elements'
 import Layout from "../components/layout"
 // import Image from "../components/image"
-import img from '../components/assets/img/wokbg.jpeg'
 import SEO from "../components/seo"
 
 
@@ -11,36 +9,13 @@ import SEO from "../components/seo"
 
 const IndexPage = ({ location }) => {
 
-  const data = useStaticQuery(graphql`
-  query Header_Query {
-    datoCmsHeader(title: {eq: "Street Food Wok"}) {
-      title
-      headerImage {
-        path
-        url
-        fluid {
-          base64
-          tracedSVG
-          aspectRatio
-          width
-          height
-          src
-          srcSet
-          sizes
-        }
-      }
-    }
-  }
-`)
-
   const handleClick = (e) => {
     console.log(e.target.value)
   }
 
   return (
-    <Layout location={location} image={img} headerTitle="Street Food Wok">
+    <Layout location={location} headerTitle="Street Food Wok">
       <SEO title="Street Food Wok" />
-
       <Card>
         <Card.CardHeader>
           Hello form Card

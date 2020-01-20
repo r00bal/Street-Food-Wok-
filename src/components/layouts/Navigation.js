@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSpring, animated, config } from 'react-spring'
+import { animated } from 'react-spring'
 import PropTypes from "prop-types"
 import { Link } from 'gatsby'
 import book from '../assets/img/book.png'
@@ -117,7 +117,7 @@ const Navigation = ({ className, stick, animation }) => {
                             activeClassName="active"
                             className="Link"
                         >
-                            <img className="LinkImg" src={img} />
+                            <img className="LinkImg" src={img} alt={name} />
                             <span className="LinkSpan">{name}</span>
                         </StyledLink>
                     </List>

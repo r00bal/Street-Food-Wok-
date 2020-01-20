@@ -5,7 +5,7 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState, useRef } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import styled from 'styled-components'
@@ -64,12 +64,11 @@ const Layout = ({ children, location, headerTitle, stick }) => {
     <>
       <GlobalStyle />
       {stick || (size.width < 520) ? <Navigation stick={"stick"} /> : <Navigation />}
-      <Header image={image} ref={refHeader}>
+      {image && (<Header image={image} ref={refHeader}>
         <Parallax style={{ zIndex: '0' }}>
           <Heading>{title}</Heading>
         </Parallax>
-      </Header>
-      {console.log(DynamicQueryHeader("Street Food Wok"))}
+      </Header>)}
       {location ?
         (location.pathname === '/') ? (size.width > 520) && <Navigation stick="stick" animation={animation} /> : null
         : null

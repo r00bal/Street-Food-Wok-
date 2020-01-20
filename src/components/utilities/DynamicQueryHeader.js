@@ -25,7 +25,7 @@ export const DynamicQueryHeader = (title) => {
   }
 }
 `)
-
+  console.log(data);
   const { edges } = data.allDatoCmsHeader;
   const headerQuery = edges.find(
     edge => edge.node.title === title
