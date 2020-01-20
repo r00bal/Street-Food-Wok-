@@ -9,15 +9,8 @@ export const DynamicQueryHeader = (title) => {
       node {
         title
         headerImage {
-          fluid {
-            base64
-            tracedSVG
-            aspectRatio
-            width
-            height
-            src
-            srcSet
-            sizes
+          fluid(maxWidth: 1920, imgixParams: { fm: "jpg", auto: "compress" }) {
+            ...GatsbyDatoCmsFluid
           }
         }
       }

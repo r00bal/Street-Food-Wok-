@@ -4,12 +4,12 @@
  *
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
-
 import React, { useState, useRef } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import styled from 'styled-components'
 import GlobalStyle from '../Global'
+import BackgroundImage from 'gatsby-background-image-es5'
 import { useSpring, config } from 'react-spring'
 import { Waypoint } from 'react-waypoint'
 import Parallax from './hooks/Parallax'
@@ -59,16 +59,24 @@ const Layout = ({ children, location, headerTitle, stick }) => {
   })
   const size = useWindowSize();
   const title = DynamicQueryHeader(headerTitle) ? DynamicQueryHeader(headerTitle).title : null;
-  const image = DynamicQueryHeader(headerTitle) ? DynamicQueryHeader(headerTitle).headerImage.fluid.src : null;
+  const image = DynamicQueryHeader(headerTitle) ? DynamicQueryHeader(headerTitle).headerImage.fluid : null;
   return (
     <>
       <GlobalStyle />
       {stick || (size.width < 520) ? <Navigation stick={"stick"} /> : <Navigation />}
-      {image && (<Header image={image} ref={refHeader}>
-        <Parallax style={{ zIndex: '0' }}>
-          <Heading>{title}</Heading>
-        </Parallax>
-      </Header>)}
+      {image && (
+        <BackgroundImage
+          Tag={`section`}
+          id={`test`}
+          fluid={image}
+        >
+          <Header image={image} ref={refHeader}>
+            <Parallax style={{ zIndex: '0' }}>
+              <Heading>{title}</Heading>
+            </Parallax>
+          </Header>
+        </BackgroundImage>
+      )}
       {location ?
         (location.pathname === '/') ? (size.width > 520) && <Navigation stick="stick" animation={animation} /> : null
         : null
