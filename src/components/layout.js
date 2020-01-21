@@ -30,7 +30,7 @@ align-items: space-around;
 
 `
 
-const Layout = ({ children, location, headerTitle, static }) => {
+const Layout = ({ children, location, headerTitle, staticHeader }) => {
 
   const data = useStaticQuery(graphql`
     query SiteTitle_Header_Query {
@@ -64,7 +64,7 @@ const Layout = ({ children, location, headerTitle, static }) => {
   return (
     <>
       <GlobalStyle />
-      {static || (size.width > 520) ? <Navigation modifiers="static" /> : <Navigation />}
+      {!staticHeader || (size.width < 520) ? <Navigation /> : <Navigation modifiers="static" />}
       {image && (
         <BackgroundImage
           fluid={image}

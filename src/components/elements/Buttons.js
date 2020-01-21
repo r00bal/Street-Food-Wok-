@@ -67,16 +67,3 @@ ${textFont};
 ${applyStyleModifiers(BUTTON_MODIFIERS)};
 `
 export const LinkButton = Button.withComponent(Link);
-// const InnerButton = styled.button`
-//  outline: ${(props) => props.clicked ? 'none' : '1px solid blue'};
-// `;
-
-// const Button = ({ children, modifiers }) => {
-//     const [clicked, isClicked] = useState(false);
-//     return (
-//         <InnerButton
-//             modifiers={modifiers} onClick={() => isClicked(!clicked)} clicked={clicked}>
-//             {children}
-//         </InnerButton>
-//     )
-// }
