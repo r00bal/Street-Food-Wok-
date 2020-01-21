@@ -34,12 +34,13 @@ const Layout = ({ children, location, headerTitle, stick }) => {
 
   const data = useStaticQuery(graphql`
     query SiteTitle_Header_Query {
-      site {
+        site {
         siteMetadata {
           title
           author
         }
       }
+
     }
   `)
 
@@ -66,8 +67,6 @@ const Layout = ({ children, location, headerTitle, stick }) => {
       {stick || (size.width < 520) ? <Navigation stick={"stick"} /> : <Navigation />}
       {image && (
         <BackgroundImage
-          Tag={`section`}
-          id={`test`}
           fluid={image}
         >
           <Header image={image} ref={refHeader}>
