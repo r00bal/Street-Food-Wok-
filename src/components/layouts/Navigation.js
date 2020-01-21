@@ -2,6 +2,7 @@ import React from 'react'
 import { animated } from 'react-spring'
 import PropTypes from "prop-types"
 import { Link } from 'gatsby'
+import { applyStyleModifiers } from 'styled-components-modifiers'
 import book from '../assets/img/book.png'
 import delivery from '../assets/img/delivery.png'
 import localisation from '../assets/img/localisation.png'
@@ -18,8 +19,79 @@ const pages = [
     { name: 'find us', path: 'findus', img: localisation }
 ]
 
-const StyledLinkStylesIfStatic = css`
-text-decoration: none;
+const NAV_MODIFIERS = {
+    static: () => `
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9));
+    box-shadow:none;
+    width:100%;
+    height:auto;
+    position: absolute;
+    left:0;
+    bottom:0;
+    top:unset;
+    padding: 10px 5%;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    `
+}
+
+const LINK_MODIFIERS = {
+    static: () => `
+    text-decoration: none;
+    text-transform: uppercase;
+    position:relative;
+    color:white;  
+    display: flex;
+    flex-direction: column; 
+    height:80px;
+    justify-content: flex-end;
+    align-items:center;
+     .LinkImg {
+         width:70px;
+         visibility: visible; 
+         padding-bottom:5px;     
+         transition: transform .2s ease;  
+            margin: auto;
+            position: static;
+           
+     }
+     &:hover {
+         .LinkImg {
+         transform:scale(1.5);
+         transform-origin : bottom;
+         }
+         .LinkSpan {
+            visibility:visible; 
+           }
+     }
+ 
+    }
+    `
+}
+
+const LIST_MODIFIERS = {
+    static: () => `
+    list-style: none;
+        display: inline-block; 
+        font-size:1.2rem;   
+        padding:15px 10px; 
+        .active {
+            .LinkImg {
+            visibility:visible;
+            }
+             .LinkSpan {
+             visibility:visible; 
+            }
+        } 
+    `
+}
+
+const StyledLink = styled(Link)`
+       text-decoration: none;
        text-transform: uppercase;
        position:relative;
        color:white;   
@@ -46,37 +118,10 @@ text-decoration: none;
             }
             `}  
         }
+        ${applyStyleModifiers(LINK_MODIFIERS)}
 `
 
-const StyledLinkStylesIfStick = css`
-       text-decoration: none;
-       text-transform: uppercase;
-       position:relative;
-       color:white;  
-       display: flex;
-       flex-direction: column; 
-       height:80px;
-       justify-content: flex-end;
-       align-items:center;
-        .LinkImg {
-            width:70px;
-            visibility: visible; 
-            padding-bottom:5px;     
-            transition: transform .2s ease;  
-        }
-        &:hover {
-            .LinkImg {
-            transform:scale(1.5);
-            transform-origin : bottom;
-            }
-        }
-`
-
-const StyledLink = styled(Link)`
-       ${({ stick }) => stick ? StyledLinkStylesIfStatic : StyledLinkStylesIfStick};
-`
-
-const ListStylesIfStick = css`
+const List = styled.li` 
         list-style: none;
         font-size:3rem;
         padding:15px 10px;  
@@ -92,27 +137,17 @@ const ListStylesIfStick = css`
         display: inline-block; 
         font-size:1.2rem;   
         `}  
+        ${applyStyleModifiers(LIST_MODIFIERS)}
 `
 
-const ListStylesIfStatic = css`
-        list-style: none;
-        display: inline-block; 
-        font-size:1.2rem;   
-        padding:15px 10px;  
-`
-
-const List = styled.li` 
-         ${({ stick }) => stick ? ListStylesIfStick : ListStylesIfStatic};
-`
-
-const Navigation = ({ className, stick, animation }) => {
+const Navigation = ({ className, animation, modifiers }) => {
 
     return (
         <animated.nav className={className} style={animation}>
             {pages.map(({ name, img, path }) => {
                 return (
-                    <List key={path} stick={stick}>
-                        <StyledLink stick={stick}
+                    <List modifiers={modifiers} key={path}>
+                        <StyledLink modifiers={modifiers}
                             to={`/${path}`}
                             activeClassName="active"
                             className="Link"
@@ -126,8 +161,9 @@ const Navigation = ({ className, stick, animation }) => {
         </animated.nav>
     )
 }
-const NavStylesIfStick = css`
-background: ${transparentBlack};
+
+export default styled(Navigation)`
+ background: ${transparentBlack};
    ${elevation[0]};
     width:100%;
     height:100vh;
@@ -144,20 +180,7 @@ background: ${transparentBlack};
     flex-direction: row;
     height:auto;
     `}
-`
-
-const NavStylesIfStatic = css`
-    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9));
-    width:100%;
-    height:auto;
-    ${absolute({ x: 0, y: 0, yProp: 'bottom', xProp: 'left' })};
-    padding: 10px 5%;
-    text-align: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
+    ${applyStyleModifiers(NAV_MODIFIERS)};
 `
 
 Navigation.propTypes = {
@@ -170,7 +193,6 @@ Navigation.defaultProps = {
     show: false
 }
 
-export default styled(Navigation)`
-   ${({ stick }) => stick ? NavStylesIfStick : NavStylesIfStatic};
-`
 
+
+// ${({ stick }) => stick ? NavStylesIfStick : NavStylesIfStatic};

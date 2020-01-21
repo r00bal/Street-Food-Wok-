@@ -28,7 +28,7 @@ const IndexPage = ({ location }) => {
   }
 
   return (
-    <Layout location={location} headerTitle="Street Food Wok">
+    <Layout location={location} headerTitle="Street Food Wok" static={true}>
       <SEO title="Street Food Wok" />
       <Card>
         <Card.CardHeader>
