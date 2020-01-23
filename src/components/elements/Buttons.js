@@ -19,10 +19,11 @@ const BUTTON_MODIFIERS = {
     `,
     red: () => `
     background-color: ${red};
-    border: none;
+    border: 2px solid ${red};
     color: white;
     &:hover {
-    background-color: ${black};
+    background-color: ${black}
+    border: 2px solid ${black};
     }
     `,
     wide: () => `

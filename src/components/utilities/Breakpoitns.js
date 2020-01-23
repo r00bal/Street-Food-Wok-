@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 
-const size = {
+export const size = {
   small: 520,
   med: 960,
   large: 1140
