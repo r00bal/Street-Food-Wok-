@@ -3,26 +3,26 @@ import { textFont, grey } from '../utilities'
 import { applyStyleModifiers, applyResponsiveStyleModifiers } from 'styled-components-modifiers'
 
 const INPUT_MODIFIERS = {
- small: () => `
+   small: () => `
     font-size: 1rem;
     padding: 3px 10px;
     min-width:100px;
     `,
- greyBorder: () => `
+   greyBorder: () => `
     border: 2px solid ${grey};
     `,
- mobileFullWidth: () => `
+   mobileFullWidth: () => `
      width:100%;
   `
 }
 
 export const Input = styled.input`
-padding: 5px 15px;
+padding: 10px 20px;
 border: 2px solid black;
 color: black;
-font-size: 1.2rem;
+font-size: 1.5rem;
 width: ${({ width }) => width ? width : `fit-content`};
-min-width:150px;
+min-width:180px;
 font-weight:500;
 cursor: pointer;
 transition: all 0.3s ease;

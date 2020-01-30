@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { above } from '../utilities'
 
 
-export const Container = styled.div`
+export const Container = styled.section`
  margin: 0 auto;
  max-width: 1200px;
  width:100%;

@@ -18,16 +18,16 @@ const BUTTON_MODIFIERS = {
     }
     `,
     red: () => `
+    border: none;
+    font-weight:600;
     background-color: ${red};
-    border: 2px solid ${red};
     color: white;
     &:hover {
     background-color: ${black}
-    border: 2px solid ${black};
     }
     `,
     wide: () => `
-    padding: 5px 100px;
+    min-width:100%;
     `,
     D3: () => `
     ${elevation[1]}
@@ -44,7 +44,7 @@ const BUTTON_MODIFIERS = {
 
 export const Button = styled.button`
 width: fit-content;
-padding: 5px 15px;
+padding: 10px 20px;
 border: 2px solid black;
 color: black;
 font-size: 1.2rem;

@@ -15,8 +15,12 @@ import { Waypoint } from 'react-waypoint'
 import Parallax from './hooks/Parallax'
 import { useWindowSize } from './hooks/useWindowSize'
 import { Container, Header, Heading } from './elements'
-import { Navigation, Footer } from './layouts'
+import { Navigation, Footer, Contact } from './layouts'
 import { DynamicQueryHeader } from './utilities'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+library.add(fab)
+
 
 const Main = styled.main`
 width: 100%;
@@ -100,7 +104,9 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
       <Main>
         <LayoutContainer>
           {children}
+          <Contact />
         </LayoutContainer>
+
       </Main>
 
       <Footer siteAuthor={data.site.siteMetadata.author} />

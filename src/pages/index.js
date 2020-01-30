@@ -1,6 +1,6 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import { Card, Heading, Button, LinkButton, Select, Input, Form} from '../components/elements'
+import { Card, Heading, Button, LinkButton, Select, Input, Form } from '../components/elements'
 import { size } from '../components/utilities'
 import { useWindowSize } from '../components/hooks/useWindowSize'
 import Layout from "../components/layout"
@@ -68,19 +68,19 @@ const IndexPage = ({ location }) => {
       <br /><br />
       <Input type="text" placeholder="I am input" responsiveModifiers={{ small: 'mobileFullWidth' }} size={windowWidth <= size.small ? 'small' : null} />
       <br /><br />
-      <Form> 
-        <Form.Label>NEWS AND OFFERS
-       <Form.Input modifiers={['small','greyBorder']}/>
-       </Form.Label>
-       <Form.Button modifiers='small'>Submit</Form.Button>
+      <Form>
+        <Form.Label modifiers='small'>NEWS AND OFFERS
+       <Form.Input modifiers={['small', 'greyBorder']} />
+        </Form.Label >
+        <Form.Button modifiers='small'>Submit</Form.Button>
       </Form>
       <br /><br />
 
-      <Form> 
-      <Form.Label modifiers='hidden'>Enter location</Form.Label>
-      <Form.Input placeholder="Enter location" />
-       
-       <Form.Button modifiers='red'>submit</Form.Button>
+      <Form>
+        <Form.Label modifiers='hidden'>Enter location</Form.Label>
+        <Form.Input placeholder="Enter location" />
+
+        <Form.Button modifiers='red'>submit</Form.Button>
       </Form>
       <br /><br />
       <Card>

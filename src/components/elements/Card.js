@@ -24,7 +24,7 @@ font-weight:400;
 ${headerFont};
 `
 const CardBody = styled.p`
-font-size: 1rem;
+font-size: 1.2rem;
 font-weight:400;
 margin-top: 0;
 ${textFont};
