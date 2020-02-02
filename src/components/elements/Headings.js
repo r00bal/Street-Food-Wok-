@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import { headerFont, transparentWhite, black, above } from '../utilities'
 
 export const Heading = styled.h1`
-font-size: 2rem;
+font-size: 3rem;
 font-weight:400;
 ${headerFont};
 color:${black};
 padding:15px 45px;
-width: fit-content;
+width: 100%;
 background: ${transparentWhite};
 text-transform: uppercase;
 ${above.small`

@@ -4,7 +4,7 @@
  *
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import styled from 'styled-components'
@@ -14,9 +14,10 @@ import { useSpring, config } from 'react-spring'
 import { Waypoint } from 'react-waypoint'
 import Parallax from './hooks/Parallax'
 import { useWindowSize } from './hooks/useWindowSize'
-import { Container, Header, Heading } from './elements'
+import { AccessibleFocusOutlineElement } from './hooks/AccessibleFocusOutlineElement'
+import { Container, Header, Heading, MenuIcon } from './elements'
 import { Navigation, Footer, Contact } from './layouts'
-import { DynamicQueryHeader } from './utilities'
+import { DynamicQueryHeader, above } from './utilities'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 library.add(fab)
@@ -31,7 +32,36 @@ display: flex;
 flex-flow: column nowrap;
 justify-content: space-around;
 align-items: space-around;
+`
 
+const MenuButton = styled.button`
+appearance: none;
+margin:0;
+padding:0;
+  color: white;
+  font-weight: bold;
+  font-size: 2rem;
+  background: transparent;
+  position: fixed;
+  width:60px;
+  height:60px;
+  top:20px;
+  right:30px;
+  border: none;
+  z-index: 15;
+  .hambrugerRectangle {
+  transition: all 0.3s ease;
+  }
+  ${
+  above.small`
+  display:none;
+    `}
+ &:hover {
+  .hambrugerRectangle {
+     fill: black;
+   }
+
+ }
 `
 
 const Layout = ({ children, location, headerTitle, staticHeader }) => {
@@ -49,9 +79,20 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
   `)
 
   const refHeader = useRef();
-
+  const [isNavOpen, setNavOpen] = useState(false);
   const [on, toggle] = useState(false)
-  const animation = useSpring({
+
+  const size = useWindowSize();
+
+  useEffect(() => {
+    if (size.width > 520) {
+      setNavOpen(false)
+    }
+  }, [size.width]); // Empty array ensures effect is only run on mount and unmount
+
+
+
+  const navAnimationDesktop = useSpring({
     from: {
       transform: !on ? 'translate3d(0,-100px,0)' : 'translate3d(0,0,0)',
 
@@ -62,13 +103,15 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
     }, config: config.mass
 
   })
-  const size = useWindowSize();
+  const navAnimationMobile = useSpring({ transform: isNavOpen ? `translate3d(0,0,0)` : `translate3d(100%,0,0)` })
   const title = DynamicQueryHeader(headerTitle) ? DynamicQueryHeader(headerTitle).title : null;
   const image = DynamicQueryHeader(headerTitle) ? DynamicQueryHeader(headerTitle).headerImage.fluid : null;
   return (
     <>
       <GlobalStyle />
-      {!staticHeader || (size.width < 520) ? <Navigation /> : <Navigation modifiers="static" />}
+      {!staticHeader || (size.width < 520) ?
+        (size.width < 520) ? <Navigation animation={navAnimationMobile} /> : <Navigation />
+        : <Navigation modifiers="static" />}
       {image && (
         <BackgroundImage
           fluid={image}
@@ -80,10 +123,17 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
           </Header>
         </BackgroundImage>
       )}
+
       {location ?
-        (location.pathname === '/') ? (size.width > 520) && <Navigation animation={animation} /> : null
+        (location.pathname === '/') ? (size.width > 520) && <Navigation animation={navAnimationDesktop} /> : null
         : null
       }
+      <AccessibleFocusOutlineElement>
+        <MenuButton className="menu-button" onClick={() => setNavOpen(!isNavOpen)}>
+          <MenuIcon open={isNavOpen} />
+        </MenuButton>
+      </AccessibleFocusOutlineElement>
+
       <Waypoint
         topOffset='-25px'
         onEnter={

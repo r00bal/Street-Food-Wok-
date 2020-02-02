@@ -35,7 +35,7 @@ const NAV_MODIFIERS = {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    z-index: 999;
+    z-index: 10;
     `
 }
 
@@ -174,7 +174,7 @@ export default styled(Navigation)`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    z-index: 999;
+    z-index: 10;
     ${
     above.small`
     flex-direction: row;
