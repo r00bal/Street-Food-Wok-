@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components'
 
-const FocusOutlineElement = styled.span`
+const RemoveFocuseOutline = styled.span`
 ${({ outline }) => outline ? null : NoOutlineOnFocus}
 `
 
@@ -26,18 +26,17 @@ export function AccessibleFocusOutlineElement({ children }) {
  }, []); // Empty array ensures that effect is only run on mount and unmount
 
  const handleKeydown = (e) => {
-  console.log(children)
-
+ 
   if (ref.current) {
-   const isTabEvent = e.keyCode === 9;
+   // const isTabEvent = e.keyCode === 9;
    setEnableOutline(ref.current.children[0] === document.activeElement)
   }
 
  }
 
  return (
-  <FocusOutlineElement ref={ref} outline={enableOutline}>
+  <RemoveFocuseOutline ref={ref} outline={enableOutline}>
    {children}
-  </FocusOutlineElement>
+  </RemoveFocuseOutline>
  );
 }

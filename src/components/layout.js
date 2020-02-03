@@ -110,7 +110,7 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
     <>
       <GlobalStyle />
       {!staticHeader || (size.width < 520) ?
-        (size.width < 520) ? <Navigation animation={navAnimationMobile} /> : <Navigation />
+        (size.width < 520) ? <Navigation open={isNavOpen} animation={navAnimationMobile} /> : <Navigation />
         : <Navigation modifiers="static" />}
       {image && (
         <BackgroundImage
