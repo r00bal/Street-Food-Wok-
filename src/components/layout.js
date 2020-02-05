@@ -109,8 +109,20 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
   return (
     <>
       <GlobalStyle />
+      <AccessibleFocusOutlineElement>
+        <MenuButton className="menu-button" onClick={() => setNavOpen(!isNavOpen)}>
+          <MenuIcon open={isNavOpen} />
+        </MenuButton>
+      </AccessibleFocusOutlineElement>
       {!staticHeader || (size.width < 520) ?
-        (size.width < 520) ? <Navigation open={isNavOpen} animation={navAnimationMobile} /> : <Navigation />
+        (size.width < 520) ?
+          <Navigation
+            open={isNavOpen}
+            toggleOpen={setNavOpen}
+            mobile={size.width < 520}
+            animation={navAnimationMobile}
+          />
+          : <Navigation />
         : <Navigation modifiers="static" />}
       {image && (
         <BackgroundImage
@@ -124,15 +136,13 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
         </BackgroundImage>
       )}
 
+
+
       {location ?
         (location.pathname === '/') ? (size.width > 520) && <Navigation animation={navAnimationDesktop} /> : null
         : null
       }
-      <AccessibleFocusOutlineElement>
-        <MenuButton className="menu-button" onClick={() => setNavOpen(!isNavOpen)}>
-          <MenuIcon open={isNavOpen} />
-        </MenuButton>
-      </AccessibleFocusOutlineElement>
+
 
       <Waypoint
         topOffset='-25px'

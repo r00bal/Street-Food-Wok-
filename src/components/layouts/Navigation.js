@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { animated } from 'react-spring'
 import PropTypes from "prop-types"
 import { Link } from 'gatsby'
@@ -121,7 +121,13 @@ const StyledLink = styled(Link)`
         ${applyStyleModifiers(LINK_MODIFIERS)}
 `
 
-const List = styled.li` 
+const List = styled.ul`
+list-style: none;
+margin:0;
+padding:0;
+`
+
+const ListElement = styled.li` 
         list-style: none;
         font-size:3rem;
         padding:15px 10px;  
@@ -140,24 +146,85 @@ const List = styled.li`
         ${applyStyleModifiers(LIST_MODIFIERS)}
 `
 
-const Navigation = ({ className, animation, modifiers }) => {
+const Navigation = ({ className, animation, modifiers, open = true, toggleOpen = null, mobile = false }) => {
+
+    const [active, setActive] = useState(null)
+    const [key, setKey] = useState()
+
+    const FirstRef = useRef();
+    const LastRef = useRef();
+
+    const handleKeyDown = (e) => {
+        if (!mobile) return
+        const { keyCode, shiftKey } = e;
+        const { activeElement } = document;
+        console.log(e.keyCode)
+        console.log(e.charCode)
+        console.log(e.key)
+        console.log(e)
+        if (keyCode === 27 && toggleOpen) {
+            toggleOpen(false)
+        } else if (keyCode === 9 && !shiftKey) {
+            setActive(activeElement)
+            setKey('next')
+        } else if (keyCode === 9 && shiftKey) {
+            setActive(activeElement)
+            setKey('prev')
+        }
+
+    }
+
+    useEffect(() => {
+        if (!mobile) return
+        if (active === LastRef.current && key === 'next') {
+            FirstRef.current.focus()
+        } else if (active === FirstRef.current && key === 'prev') {
+            LastRef.current.focus()
+        }
+        console.log(active)
+        console.log(key)
+
+    }, [active]);
+
+    useEffect(() => {
+        if (mobile && open) {
+            window.addEventListener('keydown', handleKeyDown);
+        }
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+
+        console.log(active)
+        console.log(key)
+
+    }, [open]);
 
     return (
         <animated.nav className={className} style={animation}>
-            {pages.map(({ name, img, path }) => {
-                return (
-                    <List modifiers={modifiers} key={path}>
-                        <StyledLink modifiers={modifiers}
-                            to={`/${path}`}
-                            activeClassName="active"
-                            className="Link"
-                        >
-                            <img className="LinkImg" src={img} alt={name} />
-                            <span className="LinkSpan">{name}</span>
-                        </StyledLink>
-                    </List>
-                )
-            })}
+            <List>
+                {pages.map(({ name, img, path }, index, array) => {
+
+                    const FirstElementRef = index === 0 ? { ref: FirstRef } : {};
+                    const LastElementRef = index === array.length - 1 ? { ref: LastRef } : {}
+                    return (
+                        <ListElement modifiers={modifiers} key={path} onKeyDown={handleKeyDown}>
+                            <StyledLink modifiers={modifiers}
+                                to={`/${path}`}
+                                activeClassName="active"
+                                className="Link"
+                                tabIndex={open ? '0' : '-1'}
+                                {...FirstElementRef}
+                                {...LastElementRef}
+                            >
+                                <img className="LinkImg" src={img} alt={name} />
+                                <span className="LinkSpan">{name}</span>
+                            </StyledLink>
+                        </ListElement>
+                    )
+                })}
+            </List>
+
         </animated.nav>
     )
 }

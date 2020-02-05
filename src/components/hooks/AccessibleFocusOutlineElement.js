@@ -20,13 +20,13 @@ a {
 export function AccessibleFocusOutlineElement({ children }) {
 
  const [enableOutline, setEnableOutline] = useState(false);
- const ref = useRef();
+ const ref = useRef(null);
  useEffect(() => {
   window.addEventListener('keyup', handleKeydown);
  }, []); // Empty array ensures that effect is only run on mount and unmount
 
  const handleKeydown = (e) => {
- 
+
   if (ref.current) {
    // const isTabEvent = e.keyCode === 9;
    setEnableOutline(ref.current.children[0] === document.activeElement)
