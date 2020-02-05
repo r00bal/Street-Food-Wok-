@@ -17,7 +17,7 @@ import { useWindowSize } from './hooks/useWindowSize'
 import { AccessibleFocusOutlineElement } from './hooks/AccessibleFocusOutlineElement'
 import { Container, Header, Heading, MenuIcon } from './elements'
 import { Navigation, Footer, Contact } from './layouts'
-import { DynamicQueryHeader, above } from './utilities'
+import { DynamicQueryHeader, above, size } from './utilities'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 library.add(fab)
@@ -79,23 +79,44 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
   `)
 
   const refHeader = useRef();
+  const refMenuButton = useRef();
   const [isNavOpen, setNavOpen] = useState(false);
   const [on, toggle] = useState(false)
 
-  const size = useWindowSize();
+  const { width: screenWidth } = useWindowSize();
+  const { small: mobileScreenSizeBreakpoint } = size;
+
+  const smallScreens = () => {
+    return screenWidth < mobileScreenSizeBreakpoint;
+  }
+
+
 
   useEffect(() => {
-    if (size.width > 520) {
+    const handleKeyDown = (e) => {
+      if (!isNavOpen) return
+      const { keyCode } = e;
+      if (keyCode === 27) {
+        setNavOpen(false)
+        refMenuButton.current.focus()
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isNavOpen]);
+
+  useEffect(() => {
+    if (!smallScreens()) {
       setNavOpen(false)
     }
-  }, [size.width]); // Empty array ensures effect is only run on mount and unmount
-
+  }, [screenWidth]); // Empty array ensures effect is only run on mount and unmount
 
 
   const navAnimationDesktop = useSpring({
     from: {
       transform: !on ? 'translate3d(0,-100px,0)' : 'translate3d(0,0,0)',
-
     },
     to: {
       transform: on ? 'translate3d(0,0,0)' : 'translate3d(0,-100px,0)',
@@ -110,19 +131,17 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
     <>
       <GlobalStyle />
       <AccessibleFocusOutlineElement>
-        <MenuButton className="menu-button" onClick={() => setNavOpen(!isNavOpen)}>
+        <MenuButton className="menu-button" onClick={() => setNavOpen(!isNavOpen)} ref={refMenuButton}>
           <MenuIcon open={isNavOpen} />
         </MenuButton>
       </AccessibleFocusOutlineElement>
-      {!staticHeader || (size.width < 520) ?
-        (size.width < 520) ?
-          <Navigation
-            open={isNavOpen}
-            toggleOpen={setNavOpen}
-            mobile={size.width < 520}
-            animation={navAnimationMobile}
-          />
-          : <Navigation />
+      {/* 1) if there is no staticHeader props (not index page - main page) OR there is small screen width - mobile devices - then:
+      - show mobile navigation for mobile - small width screens 
+      - or desktop navigation on the large width devices 
+      2) If we are on destktop devices and on the index page then show main page Navigation variation*/}
+      {!staticHeader || (smallScreens()) ?
+        (smallScreens()) ?
+          <Navigation open={isNavOpen} toggleOpen={setNavOpen} mobile={smallScreens()} animation={navAnimationMobile} /> : <Navigation />
         : <Navigation modifiers="static" />}
       {image && (
         <BackgroundImage
@@ -139,7 +158,7 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
 
 
       {location ?
-        (location.pathname === '/') ? (size.width > 520) && <Navigation animation={navAnimationDesktop} /> : null
+        (location.pathname === '/') ? (!smallScreens()) && <Navigation animation={navAnimationDesktop} open={on} /> : null
         : null
       }
 

@@ -158,13 +158,11 @@ const Navigation = ({ className, animation, modifiers, open = true, toggleOpen =
         if (!mobile) return
         const { keyCode, shiftKey } = e;
         const { activeElement } = document;
-        console.log(e.keyCode)
-        console.log(e.charCode)
-        console.log(e.key)
-        console.log(e)
-        if (keyCode === 27 && toggleOpen) {
-            toggleOpen(false)
-        } else if (keyCode === 9 && !shiftKey) {
+        console.log('handleKeyDown')
+        // if (keyCode === 27 && toggleOpen) {
+        //     toggleOpen(false)
+        // } 
+        if (keyCode === 9 && !shiftKey) {
             setActive(activeElement)
             setKey('next')
         } else if (keyCode === 9 && shiftKey) {
@@ -176,35 +174,29 @@ const Navigation = ({ className, animation, modifiers, open = true, toggleOpen =
 
     useEffect(() => {
         if (!mobile) return
+        console.log('first')
         if (active === LastRef.current && key === 'next') {
             FirstRef.current.focus()
         } else if (active === FirstRef.current && key === 'prev') {
             LastRef.current.focus()
         }
-        console.log(active)
-        console.log(key)
 
     }, [active]);
 
-    useEffect(() => {
-        if (mobile && open) {
-            window.addEventListener('keydown', handleKeyDown);
-        }
-
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-        };
-
-        console.log(active)
-        console.log(key)
-
-    }, [open]);
+    // useEffect(() => {
+    //     console.log('second')
+    //     if (mobile && open) {
+    //         window.addEventListener('keydown', handleKeyDown);
+    //     }
+    //     return () => {
+    //         window.removeEventListener('keydown', handleKeyDown);
+    //     };
+    // }, [open]);
 
     return (
         <animated.nav className={className} style={animation}>
             <List>
                 {pages.map(({ name, img, path }, index, array) => {
-
                     const FirstElementRef = index === 0 ? { ref: FirstRef } : {};
                     const LastElementRef = index === array.length - 1 ? { ref: LastRef } : {}
                     return (
