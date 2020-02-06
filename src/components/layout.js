@@ -155,8 +155,6 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
         </BackgroundImage>
       )}
 
-
-
       {location ?
         (location.pathname === '/') ? (!smallScreens()) && <Navigation animation={navAnimationDesktop} open={on} /> : null
         : null
@@ -167,16 +165,12 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
         topOffset='-25px'
         onEnter={
           () => {
-
             toggle(false)
-
           }
         }
         onLeave={
           () => {
-
             toggle(true)
-
           }
         }
       />
@@ -185,9 +179,7 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
           {children}
           <Contact />
         </LayoutContainer>
-
       </Main>
-
       <Footer siteAuthor={data.site.siteMetadata.author} />
     </>
   )
