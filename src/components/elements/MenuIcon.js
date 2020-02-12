@@ -1,23 +1,32 @@
 import React from 'react'
+import { animated, useSpring, config } from 'react-spring'
 
-export const MenuIcon = ({open}) => {
+const openTransformation = {
+ top: 'translate(32 60) rotate(-45)',
+ center: 'translate(38 28) rotate(45)',
+ bottom: 'translate(32 60) rotate(-45)',
+}
+
+const closeTransformation = {
+ top: 'translate(28 28) rotate(0)',
+ center: 'translate(28 44) rotate(0)',
+ bottom: 'translate(28 60) rotate(0)',
+}
+
+
+
+export const MenuIcon = ({ open }) => {
+ const { top, center, bottom } = useSpring({
+  to: open ? openTransformation : closeTransformation,
+  config: config.stiff,
+ })
  return (
-  <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 97 99">
-   <g id="hamburger" transform="translate(-1601 -87.426)">
-    <rect id="Rectangle" class="hambrugerRectangle"data-name="Rectangle 4" width="97" height="99" transform="translate(1601 87.426)" fill="#fc3350" />
-    <g id="lines" transform="translate(1623.867 115.257)">
-     <g id="Repeat_Grid_1" data-name="Repeat Grid 1" clip-path="url(#clip-path)">
-      <g transform="translate(-1607 -106)">
-       <rect id="Rectangle1" data-name="Rectangle 5" width="45" height="8"s transform="translate(1611 108)" fill="#f8f8f8" />
-      </g>
-      <g transform="translate(-1607 -88)">
-       <rect id="Rectangle2" data-name="Rectangle 5" width="45" height="8"s transform="translate(1611 108)" fill="#f8f8f8" />
-      </g>
-      <g transform="translate(-1607 -70)">
-       <rect id="Rectangle3" data-name="Rectangle 5" width="45" height="8"s transform="translate(1611 108)" fill="#f8f8f8" />
-      </g>
-     </g>
-    </g>
+  <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 100">
+   <rect id="Rectangle" class="hambrugerRectangle" width="100" height="100" fill="#fc3350" />
+   <g id="lines">
+    <animated.rect id="Rectangle1" width="45" height="8" transform={top} fill="#f8f8f8" />
+    <animated.rect id="Rectangle2" width="45" height="8" transform={center} fill="#f8f8f8" />
+    <animated.rect id="Rectangle3" width="45" height="8" transform={bottom} fill="#f8f8f8" />
    </g>
   </svg>
 

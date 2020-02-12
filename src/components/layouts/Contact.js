@@ -1,7 +1,7 @@
-import { Link } from "gatsby"
+
 import styled from 'styled-components'
 import React from "react"
-import { Container, Form, Button } from '../elements'
+import { Container, Form } from '../elements'
 import { AwesomeIcon } from '../layouts'
 import { above, grey, skyblue, } from '../utilities'
 

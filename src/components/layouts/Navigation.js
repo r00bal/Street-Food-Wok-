@@ -8,8 +8,8 @@ import delivery from '../assets/img/delivery.png'
 import localisation from '../assets/img/localisation.png'
 import noodlebox from '../assets/img/noodlebox.png'
 import polaroid from '../assets/img/polaroid.png'
-import styled, { css } from 'styled-components'
-import { transparentBlack, elevation, fixed, absolute, above } from '../utilities'
+import styled from 'styled-components'
+import { transparentBlack, elevation, fixed, above } from '../utilities'
 
 const pages = [
     { name: 'menu', path: 'menu', img: noodlebox },

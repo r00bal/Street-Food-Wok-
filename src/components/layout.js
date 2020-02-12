@@ -26,6 +26,8 @@ library.add(fab)
 const Main = styled.main`
 width: 100%;
 flex: 1 0 auto;
+margin-top: 5rem;
+margin-bottom: 5rem;
 `
 const LayoutContainer = styled(Container)`
 display: flex;
@@ -80,6 +82,7 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
 
   const refHeader = useRef();
   const refMenuButton = useRef();
+
   const [isNavOpen, setNavOpen] = useState(false);
   const [on, toggle] = useState(false)
 
@@ -89,8 +92,6 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
   const smallScreens = () => {
     return screenWidth < mobileScreenSizeBreakpoint;
   }
-
-
 
   useEffect(() => {
     const handleKeyDown = (e) => {

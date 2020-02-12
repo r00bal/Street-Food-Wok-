@@ -8,7 +8,7 @@ display: flex;
 flex-direction: column;
 justify-content:center;
 align-items:center;
-padding:1rem;
+padding:2rem;
 ${elevation[0]};
 `
 

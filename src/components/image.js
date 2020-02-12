@@ -1,6 +1,5 @@
 import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Img from "gatsby-image"
 
 /*
@@ -16,14 +15,15 @@ import Img from "gatsby-image"
 
 const ImageFrame = styled(Img)`
  border: 1.5px solid black;
- width:${({ width }) => width ? `${width}px` : `auto`};
- height:${({ height }) => height ? `${height}px` : `auto`};
+ width: 100%;
+ /* width:${({ width }) => width ? `${width}px` : `auto`};
+ height:${({ height }) => height ? `${height}px` : `auto`}; */
  `
 
-const Image = ({ width, height, fluid }) => {
+const Image = ({ width, height, fluid, cssProps }) => {
   return <ImageFrame width={width} height={height} fluid={fluid} imgStyle={{
     padding: '20px 10px'
-  }} />
+  }} css={cssProps} />
 }
 
 export default Image
