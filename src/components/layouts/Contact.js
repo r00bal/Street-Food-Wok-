@@ -23,7 +23,7 @@ background-color:white;
 border-radius: 50%;
 text-decoration: none;
 cursor: pointer;
-border: 1px solid ${grey};
+border: 2px solid ${grey};
 margin: .5rem;
 transition: all 0.3s ease;
 &:hover {
@@ -68,7 +68,7 @@ align-items: flex-start;
     
   border:none;
   ${above.med`
-    border-right: 1px solid ${grey};
+    border-right: 2px solid ${grey};
   
     `}
  }
@@ -76,11 +76,10 @@ align-items: flex-start;
     border:none;};
   flex-direction: column;
   ${above.med`
-    border-left: 1px solid ${grey};
+    border-left: 2px solid ${grey};
   
     `}
  }
-}
 `
 
 
@@ -116,6 +115,6 @@ const Contact = ({ className }) => {
 export default styled(Contact)`
 width:100%;
  flex-shrink: 0;
- border: 2px solid ${grey};
+ border: 4px solid ${grey};
  background-color: ${skyblue};   
 `

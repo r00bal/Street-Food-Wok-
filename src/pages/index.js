@@ -58,6 +58,7 @@ const IndexPage = ({ location }) => {
         return (
           <ContentBox
             index={index}
+            mobile={windowWidth < size.med}
             id={id}
             title={title}
             copy={copy}
