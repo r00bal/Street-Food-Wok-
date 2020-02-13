@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button } from './Buttons'
+import { Button, LinkButton } from './Buttons'
 import { elevation } from '../utilities';
 import { headerFont, textFont } from '../utilities'
 
@@ -13,6 +13,12 @@ ${elevation[0]};
 `
 
 const CardButton = styled(Button)`
+&:hover {
+ ${elevation[0]};
+}
+`
+
+const CardLinkButton = styled(LinkButton)`
 &:hover {
  ${elevation[0]};
 }
@@ -35,3 +41,5 @@ Card.CardHeader = CardHeader;
 Card.CardBody = CardBody;
 
 Card.CardButton = CardButton;
+
+Card.CardLinkButton = CardLinkButton;

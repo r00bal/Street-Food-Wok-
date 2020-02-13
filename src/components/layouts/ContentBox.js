@@ -16,7 +16,7 @@ ${above.med`
 `
 
 
-export default function ContentBox({ id, title, copy, cta, image, index }) {
+export default function ContentBox({ id, title, copy, cta, url, image, index }) {
  const reverse = index % 2 === 0;
  return (
   <Wrapper key={id} reverse={reverse}>
@@ -33,9 +33,9 @@ export default function ContentBox({ id, title, copy, cta, image, index }) {
     <Card.CardBody>
      {copy}
     </Card.CardBody>
-    <Card.CardButton>
+    <Card.CardLinkButton to={url}>
      {cta}
-    </Card.CardButton>
+    </Card.CardLinkButton>
    </Card>
    <Image fluid={image}
     cssProps={`

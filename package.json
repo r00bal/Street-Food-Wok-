@@ -16,6 +16,7 @@
     "gatsby": "^2.18.12",
     "gatsby-background-image-es5": "^0.9.12",
     "gatsby-image": "^2.2.34",
+    "gatsby-plugin-anchor-links": "^1.1.0",
     "gatsby-plugin-config": "^1.0.7",
     "gatsby-plugin-manifest": "^2.2.31",
     "gatsby-plugin-offline": "^3.0.27",

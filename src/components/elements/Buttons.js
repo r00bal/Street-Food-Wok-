@@ -29,21 +29,28 @@ const BUTTON_MODIFIERS = {
     wide: () => `
     min-width:100%;
     `,
-    D3: () => `
+    D3: ({ active }) => `
     ${elevation[1]}
     transition: all 0.1s ease;
+    ${active ? 'transform: translate3d(9px,9px,0)' : null};
+    ${active ? 'box-shadow:none;' : null};
     &:hover {
         background-color: white;
-        color: black;
-        box-shadow:none;
-        font-weight:500;
-    transform: translate3d(9px,9px,0)
+        color: ${red};
+        font-weight:700;
         }
     `,
 }
 
+export const AnchorTag = styled.a`
+text-decoration: none;
+cursor: pointer;
+color: inherit;
+`
+
 export const Button = styled.button`
-width: fit-content;
+/* width: fit-content;
+min-width:100px; */
 padding: 10px 20px;
 border: 2px solid black;
 color: black;
@@ -68,3 +75,5 @@ ${textFont};
 ${applyStyleModifiers(BUTTON_MODIFIERS)};
 `
 export const LinkButton = Button.withComponent(Link);
+
+export const AnchorTagButton = Button.withComponent(AnchorTag);

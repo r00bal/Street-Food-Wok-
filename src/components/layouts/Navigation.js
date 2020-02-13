@@ -121,7 +121,7 @@ const StyledLink = styled(Link)`
         ${applyStyleModifiers(LINK_MODIFIERS)}
 `
 
-const List = styled.ul`
+export const List = styled.ul`
 list-style: none;
 margin:0;
 padding:0;
