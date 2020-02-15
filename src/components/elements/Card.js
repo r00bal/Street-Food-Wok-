@@ -10,6 +10,7 @@ justify-content:center;
 align-items:center;
 padding:2rem;
 ${elevation[0]};
+
 `
 
 const CardButton = styled(Button)`

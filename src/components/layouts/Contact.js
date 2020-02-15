@@ -54,7 +54,7 @@ align-items: flex-start;
  flex-grow: 1;
  display:flex;
  justify-content:flex-start;
- padding:1rem;
+ padding: 2.45rem 2.0875rem;
  ${above.med`
      padding-left:10%;
   

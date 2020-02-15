@@ -34,6 +34,9 @@ display: flex;
 flex-flow: column nowrap;
 justify-content: space-around;
 align-items: space-around;
+div,ul, select {
+  margin-bottom: 2rem;
+}
 `
 
 const MenuButton = styled.button`
