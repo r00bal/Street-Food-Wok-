@@ -3,15 +3,25 @@ import { textFont, grey } from '../utilities'
 import { applyStyleModifiers, applyResponsiveStyleModifiers } from 'styled-components-modifiers'
 
 const INPUT_MODIFIERS = {
-   small: () => `
+  small: () => `
     font-size: 1rem;
     padding: 3px 10px;
     min-width:100px;
     `,
-   greyBorder: () => `
+  greyBorder: () => `
     border: 2px solid ${grey};
     `,
-   mobileFullWidth: () => `
+  // accessibleHidden: () => `
+  //   position: absolute;
+  //   border: 0;
+  //   margin: -1px;
+  //   padding: 0;
+  //   width: 1px;
+  //   height: 1px;
+  //   overflow: hidden;
+  //   clip: rect(0px, 0px, 0px, 0px);
+  //   `,
+  mobileFullWidth: () => `
      width:100%;
   `
 }

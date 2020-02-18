@@ -8,6 +8,7 @@ import { useWindowSize } from '../components/hooks/useWindowSize'
 import { AccessibleFocusOutlineElement } from '../components/hooks/AccessibleFocusOutlineElement'
 import { size, above } from '../components/utilities'
 import { Button, Select, Card } from "../components/elements"
+import { Checkbox } from "../components/layouts"
 import Image from '../components/image'
 
 const menu = ['starters', 'salads', 'wok-fired', 'sides', 'deserts', 'kids', 'drinks', 'pho']
@@ -54,7 +55,9 @@ const StyledButtonList = ({ options, state, setState }) => (
 
 const StyledSelectList = ({ options, setState }) => (
   <AccessibleFocusOutlineElement>
-    <Select>
+    <Select css={`
+    margin:0 0 2rem 0;
+    `}>
       {options.map((option) => (
         <option value={option} onClick={(e) => {
           setState(e.target.value)
@@ -113,9 +116,9 @@ const MenuPage = ({ location }) => {
         <Card css={`
             width:100%;
     `}>
-          <Card.CardHeader>
-            Menu
-    </Card.CardHeader>
+          <Card.CardMenu>
+            <Checkbox name="vegegatrian" value="vegegatrian" label="vegegatrian" />
+          </Card.CardMenu>
           <Card.CardBody>
 
           </Card.CardBody>

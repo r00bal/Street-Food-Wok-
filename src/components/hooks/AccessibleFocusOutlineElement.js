@@ -1,3 +1,6 @@
+
+
+
 import React, { useState, useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components'
 
@@ -10,7 +13,7 @@ const NoOutlineOnFocus = css`
 button {
  outline: none;
 }
-a {
+a, input {
  outline: none;
 }
 `
