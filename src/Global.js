@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import { normalize } from 'polished';
-import { textFont } from './components/utilities'
+import { textFont, focusOutline } from './components/utilities'
 
 const GlobalStyles = createGlobalStyle`
 ${normalize()};
@@ -37,16 +37,19 @@ body {
       height: 100%;
   flex-direction: column;
     }
-  
- 
+  }
   }
 
-  }
+  /* The default outline styling, for greatest accessibility. */
+/* You can skip this to just use the browser's defaults. */
+:focus {
+  ${focusOutline}
+}
 
-
-
-
-
+/* When mouse is detected, ALL focused elements have outline removed. */
+body.using-mouse :focus {
+  outline: none !important;
+}
 `
 
 

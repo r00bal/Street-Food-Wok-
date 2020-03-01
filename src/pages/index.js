@@ -35,9 +35,9 @@ const IndexPage = ({ location }) => {
       <SEO title="Street Food Wok" />
       {allDatoCmsCard.edges.map(({ node }, index) => {
         const { id, title, copy, cta, url, image } = node;
-        console.log(index)
         return (
           <ContentBox
+            key={id}
             index={index}
             mobile={windowWidth < size.med}
             id={id}

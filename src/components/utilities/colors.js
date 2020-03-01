@@ -14,3 +14,5 @@ export const social = {
     twitter: '#00aced',
     facebook: '#3b5998'
 }
+
+export const focusOutline = `outline: ${red} auto 2px;`;

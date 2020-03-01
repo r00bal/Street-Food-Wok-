@@ -2,25 +2,32 @@
 import React from "react"
 import styled from 'styled-components';
 import { Input } from '../elements'
-import { textFont, grey, darkGrey } from '../utilities'
+import { textFont, grey, darkGrey, focusOutline } from '../utilities'
 import { applyStyleModifiers, applyResponsiveStyleModifiers } from 'styled-components-modifiers'
-import { AccessibleFocusOutlineElement } from '../hooks/AccessibleFocusOutlineElement'
+
 
 const CHECKBOX_MODIFIERS = {
-    small: () => `
+  small: () => `
     font-size: 1rem;
     `,
 }
+
+const CheckboxContainer = styled.div`
+display: flex;
+flex-flow: row wrap;
+`
 
 
 const LabelCheckbox = styled.label`
     position: relative;
     cursor: pointer;
     padding: 0;
+    display: flex;
+flex-flow: row nowrap;
   &:before {
     content: '';
+   
     margin-right: 10px;
-    display: inline-block;
     vertical-align: text-top;
     width: 20px;
     height: 20px;
@@ -32,15 +39,15 @@ const LabelCheckbox = styled.label`
 
 const InputCheckbox = styled(Input)`
 position: absolute; 
-  opacity: 0; 
   &:hover + ${LabelCheckbox} {
       &:before {
         border: 2px solid black;
       } 
+      font-weight:700;
 }
 &:focus + ${LabelCheckbox} {
       &:before {
-        /* outline: -webkit-focus-ring-color auto 5px; */
+        border: 2px solid black;
       } 
 }
 &:checked + ${LabelCheckbox}{
@@ -72,13 +79,10 @@ position: absolute;
 
 
 const Checkbox = ({ label, value, name }) => (
-    <div>
-
-        <InputCheckbox modifiers="accessibleHidden" value={value} id={name} name={name} type="checkbox" />
-        <LabelCheckbox for={name}>{label}</LabelCheckbox>
-
-
-    </div>
+  <CheckboxContainer>
+    <InputCheckbox modifiers="accessibleHidden" value={value} id={name} name={name} type="checkbox" />
+    <LabelCheckbox for={name}>{label}</LabelCheckbox>
+  </CheckboxContainer>
 )
 
 

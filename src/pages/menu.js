@@ -5,13 +5,13 @@ import styled from 'styled-components'
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { useWindowSize } from '../components/hooks/useWindowSize'
-import { AccessibleFocusOutlineElement } from '../components/hooks/AccessibleFocusOutlineElement'
 import { size, above } from '../components/utilities'
 import { Button, Select, Card } from "../components/elements"
 import { Checkbox } from "../components/layouts"
 import Image from '../components/image'
 
 const menu = ['starters', 'salads', 'wok-fired', 'sides', 'deserts', 'kids', 'drinks', 'pho']
+const tags = ['vegan', 'vegetarian', 'diary free', 'gluten free', '<500 cal']
 
 const StyledList = styled.ul`
 margin:0 0 5rem 0;
@@ -37,34 +37,32 @@ const StyledButtonList = ({ options, state, setState }) => (
   <StyledList>
     {options.map((option) => (
       <li id="menu">
-        <AccessibleFocusOutlineElement>
-          <Button modifiers="D3"
-            value={option}
-            active={option === state}
-            onClick={(e) => {
-              setState(e.target.value)
-            }}
-          >
-            {option}
-          </Button>
-        </AccessibleFocusOutlineElement>
+        <Button modifiers="D3"
+          value={option}
+          active={option === state}
+          onClick={(e) => {
+            setState(e.target.value)
+          }}
+        >
+          {option}
+        </Button>
       </li>
     ))}
   </StyledList>
 )
 
 const StyledSelectList = ({ options, setState }) => (
-  <AccessibleFocusOutlineElement>
-    <Select css={`
+
+  <Select css={`
     margin:0 0 2rem 0;
     `}>
-      {options.map((option) => (
-        <option value={option} onClick={(e) => {
-          setState(e.target.value)
-        }}>{option}</option>
-      ))}
-    </Select>
-  </AccessibleFocusOutlineElement>
+    {options.map((option) => (
+      <option value={option} onClick={(e) => {
+        setState(e.target.value)
+      }}>{option}</option>
+    ))}
+  </Select>
+
 )
 
 
@@ -117,7 +115,8 @@ const MenuPage = ({ location }) => {
             width:100%;
     `}>
           <Card.CardMenu>
-            <Checkbox name="vegegatrian" value="vegegatrian" label="vegegatrian" />
+
+            {tags.map(tag => <Checkbox name={tag} value={tag} label={tag} />)}
           </Card.CardMenu>
           <Card.CardBody>
 

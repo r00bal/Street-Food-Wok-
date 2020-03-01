@@ -11,16 +11,15 @@ const INPUT_MODIFIERS = {
   greyBorder: () => `
     border: 2px solid ${grey};
     `,
-  // accessibleHidden: () => `
-  //   position: absolute;
-  //   border: 0;
-  //   margin: -1px;
-  //   padding: 0;
-  //   width: 1px;
-  //   height: 1px;
-  //   overflow: hidden;
-  //   clip: rect(0px, 0px, 0px, 0px);
-  //   `,
+  accessibleHidden: () => `
+    position: absolute;
+    border: 0;
+    padding: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0px, 0px, 0px, 0px);
+    `,
   mobileFullWidth: () => `
      width:100%;
   `

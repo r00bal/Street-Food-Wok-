@@ -14,7 +14,6 @@ import { useSpring, config } from 'react-spring'
 import { Waypoint } from 'react-waypoint'
 import Parallax from './hooks/Parallax'
 import { useWindowSize } from './hooks/useWindowSize'
-import { AccessibleFocusOutlineElement } from './hooks/AccessibleFocusOutlineElement'
 import { Container, Header, Heading, MenuIcon } from './elements'
 import { Navigation, Footer, Contact } from './layouts'
 import { DynamicQueryHeader, above, size } from './utilities'
@@ -77,7 +76,6 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
           author
         }
       }
-
     }
   `)
 
@@ -87,6 +85,8 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
   const [isNavOpen, setNavOpen] = useState(false);
   const [on, toggle] = useState(false)
 
+
+
   const { width: screenWidth } = useWindowSize();
   const { small: mobileScreenSizeBreakpoint } = size;
 
@@ -95,6 +95,7 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
   }
 
   useEffect(() => {
+    // close menu on escape button is pressed
     const handleKeyDown = (e) => {
       if (!isNavOpen) return
       const { keyCode } = e;
@@ -113,7 +114,23 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
     if (!smallScreens()) {
       setNavOpen(false)
     }
-  }, [screenWidth]); // Empty array ensures effect is only run on mount and unmount
+  }, [screenWidth]);
+  // Empty array ensures effect is only run on mount and unmount
+
+  useEffect(() => {
+    // Let the document know when the mouse is being used
+    document.body.addEventListener('mousedown', function () {
+      document.body.classList.add('using-mouse');
+    });
+
+    // Re-enable focus styling when Tab is pressed
+    document.body.addEventListener('keydown', function (event) {
+      if (event.keyCode === 9) {
+        document.body.classList.remove('using-mouse');
+      }
+    });
+  });
+
 
 
   const navAnimationDesktop = useSpring({
@@ -132,11 +149,11 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
   return (
     <>
       <GlobalStyle />
-      <AccessibleFocusOutlineElement>
-        <MenuButton className="menu-button" onClick={() => setNavOpen(!isNavOpen)} ref={refMenuButton}>
-          <MenuIcon open={isNavOpen} />
-        </MenuButton>
-      </AccessibleFocusOutlineElement>
+
+      <MenuButton className="menu-button" onClick={() => setNavOpen(!isNavOpen)} ref={refMenuButton}>
+        <MenuIcon open={isNavOpen} />
+      </MenuButton>
+
       {/* 1) if there is no staticHeader props (not index page - main page) OR there is small screen width - mobile devices - then:
       - show mobile navigation for mobile - small width screens 
       - or desktop navigation on the large width devices 
