@@ -18,7 +18,7 @@ flex-direction: column;
 align-items:center;
 padding: 2rem 0 2rem 0;
 ${elevation[0]};
-${applyStyleModifiers(BUTTON_MODIFIERS)};
+${applyStyleModifiers(CARD_MODIFIERS)};
 `
 
 const CardMenu = styled.div`
