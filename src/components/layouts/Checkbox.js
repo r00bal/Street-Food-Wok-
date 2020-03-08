@@ -78,9 +78,9 @@ position: absolute;
 
 
 
-const Checkbox = ({ label, value, name }) => (
+const Checkbox = ({ label, value, name, checked = false, handleChange }) => (
   <CheckboxContainer>
-    <InputCheckbox modifiers="accessibleHidden" value={value} id={name} name={name} type="checkbox" />
+    <InputCheckbox modifiers="accessibleHidden" value={value} id={name} name={name} checked={checked} type="checkbox" onChange={handleChange} />
     <LabelCheckbox for={name}>{label}</LabelCheckbox>
   </CheckboxContainer>
 )

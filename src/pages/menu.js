@@ -5,13 +5,34 @@ import styled from 'styled-components'
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { useWindowSize } from '../components/hooks/useWindowSize'
-import { size, above } from '../components/utilities'
+import { size } from '../components/utilities'
 import { Button, Select, Card } from "../components/elements"
 import { Checkbox } from "../components/layouts"
 import Image from '../components/image'
 
 const menu = ['starters', 'salads', 'wok-fired', 'sides', 'deserts', 'kids', 'drinks', 'pho']
-const tags = ['vegan', 'vegetarian', 'diary free', 'gluten free', '<500 cal']
+const tags = [
+  {
+    name: 'vegan',
+    value: '#vegan_'
+  },
+  {
+    name: 'vegetarian',
+    value: '#vegetarian_'
+  },
+  {
+    name: 'diary free',
+    value: '#diaryfree_'
+  },
+  {
+    name: 'gluten free',
+    value: '#glutenfree_'
+  },
+  {
+    name: '<500 cal',
+    value: '#<500 cal_'
+  }
+]
 
 const StyledList = styled.ul`
 margin:0 0 5rem 0;
@@ -55,11 +76,13 @@ const StyledSelectList = ({ options, setState }) => (
 
   <Select css={`
     margin:0 0 2rem 0;
-    `}>
+    `}
+    onChange={(e) => {
+      setState(e.target.value)
+    }}
+  >
     {options.map((option) => (
-      <option value={option} onClick={(e) => {
-        setState(e.target.value)
-      }}>{option}</option>
+      <option value={option} >{option}</option>
     ))}
   </Select>
 
@@ -68,7 +91,7 @@ const StyledSelectList = ({ options, setState }) => (
 
 
 const MenuPage = ({ location }) => {
-  const { allDatoCmsAsset } = useStaticQuery(graphql`
+  const { allDatoCmsAsset, allDatoCmsMenu } = useStaticQuery(graphql`
   query menu {
     allDatoCmsAsset(filter: {tags: {eq: "pho"}}) {
     edges {
@@ -87,13 +110,47 @@ const MenuPage = ({ location }) => {
       }
     }
   }
+  allDatoCmsMenu {
+   edges {
+     node {
+       id
+      name
+      category
+      ingredients
+      tag
+     }
+   }
+ }
 }
 ` )
 
   const windowWidth = useWindowSize().width;
   const [menuOption, setMenuOption] = useState(null)
-  console.log(allDatoCmsAsset.edges[0].node);
+  const [checkedItems, setCheckedItems] = useState({})
+  const handleCheckboxChange = (e) => {
+    const name = e.target.name;
+    const isChecked = e.target.checked;
+    setCheckedItems({ ...checkedItems, [name]: isChecked })
+
+  }
+  const checkIfChecked = () => {
+    console.log('NEW')
+    const keys = Object.keys(checkedItems);
+    for (const key in checkedItems) {
+      if (checkedItems.hasOwnProperty(key)) {
+        const element = checkedItems[key];
+        console.log(key, element)
+        if (element) {
+          console.log('isChecked ', key);
+        }
+      }
+    }
+
+  }
+
   const { fluid } = allDatoCmsAsset.edges[0].node;
+  const { edges } = allDatoCmsMenu;
+
   return (
     <Layout location={location} stick="stick" headerTitle={"Menu"}>
       <SEO title="Page two" />
@@ -104,7 +161,7 @@ const MenuPage = ({ location }) => {
           state={menuOption}
           setState={setMenuOption}
         />
-        : <StyledSelectList options={menu} setState={setMenuOption} />}
+        : <StyledSelectList options={menu} state={menuOption} setState={setMenuOption} />}
       <MenuWrapper>
         <Image fluid={fluid} cssProps={`
           height:550px;
@@ -116,11 +173,23 @@ const MenuPage = ({ location }) => {
     `}>
           <Card.CardMenu>
 
-            {tags.map(tag => <Checkbox name={tag} value={tag} label={tag} />)}
+            {tags.map(({ name, value }) => <Checkbox name={name} value={value} label={name} checked={checkedItems[name]} handleChange={handleCheckboxChange} />)}
           </Card.CardMenu>
-          <Card.CardBody>
+          <Card.CardRow>
+            {checkIfChecked()}
+            {edges.map(({ node }) => {
+              const { category, tag } = node;
+              if (category === menuOption) {
+                return (
+                  <Card.CardRowItem>
+                    <Card.CardHeader modifiers={["textFont", "red"]}>{node.name}</Card.CardHeader>
+                    <Card.CardBody> {node.ingredients}</Card.CardBody>
+                  </Card.CardRowItem>
+                )
+              }
+            })}
+          </Card.CardRow>
 
-          </Card.CardBody>
         </Card>
       </MenuWrapper>
       <Link to="/">Go back to the homepage</Link>
