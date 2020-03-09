@@ -4,4 +4,5 @@ export * from './Breakpoitns'
 export * from "./Position"
 export * from "./colors"
 export * from "./Type"
+export * from "./Functions"
 export { elevation }

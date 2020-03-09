@@ -5,12 +5,12 @@ import styled from 'styled-components'
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { useWindowSize } from '../components/hooks/useWindowSize'
-import { size } from '../components/utilities'
+import { size, anyIsTrue, above } from '../components/utilities'
 import { Button, Select, Card } from "../components/elements"
 import { Checkbox } from "../components/layouts"
 import Image from '../components/image'
 
-const menu = ['starters', 'salads', 'wok-fired', 'sides', 'deserts', 'kids', 'drinks', 'pho']
+const menu = ['starters', 'salads', 'wok-fried', 'sides', 'deserts', 'kids', 'drinks', 'pho']
 const tags = [
   {
     name: 'vegan',
@@ -49,9 +49,27 @@ li {
 const MenuWrapper = styled.div`
 display:flex;
 /* flex-flow:column wrap; */
-justify-content: space-between;
-margin-bottom:5rem;
+justify-content:space-between;
+margin-bottom:3rem;
+
 `
+
+const MenuImage = styled.div`
+display:none;
+max-width:300px;
+width:100%;
+ ${above.med`
+    display:flex;
+    `} 
+`
+
+const MenuButton = styled(Button)`
+display:block;
+margin-left: auto;
+margin-right: auto;
+width:100%;
+max-width:500px;
+margin-bottom:5rem;`
 
 
 const StyledButtonList = ({ options, state, setState }) => (
@@ -125,7 +143,7 @@ const MenuPage = ({ location }) => {
 ` )
 
   const windowWidth = useWindowSize().width;
-  const [menuOption, setMenuOption] = useState(null)
+  const [menuOption, setMenuOption] = useState('starters')
   const [checkedItems, setCheckedItems] = useState({})
   const handleCheckboxChange = (e) => {
     const name = e.target.name;
@@ -133,19 +151,17 @@ const MenuPage = ({ location }) => {
     setCheckedItems({ ...checkedItems, [name]: isChecked })
 
   }
-  const checkIfChecked = () => {
-    console.log('NEW')
-    const keys = Object.keys(checkedItems);
+  const checkIfChecked = (string) => {
+    // if (!anyIsTrue(checkedItems)) 
     for (const key in checkedItems) {
       if (checkedItems.hasOwnProperty(key)) {
         const element = checkedItems[key];
-        console.log(key, element)
         if (element) {
-          console.log('isChecked ', key);
+          return string.includes(key);
         }
       }
     }
-
+    return false
   }
 
   const { fluid } = allDatoCmsAsset.edges[0].node;
@@ -163,11 +179,16 @@ const MenuPage = ({ location }) => {
         />
         : <StyledSelectList options={menu} state={menuOption} setState={setMenuOption} />}
       <MenuWrapper>
-        <Image fluid={fluid} cssProps={`
+        <MenuImage>
+
+          <Image fluid={fluid} cssProps={`
+
           height:550px;
           max-width:300px;
           margin: 0 2rem 0 0;
-        `} />
+
+          `} />
+        </MenuImage>
         <Card css={`
             width:100%;
     `}>
@@ -176,22 +197,24 @@ const MenuPage = ({ location }) => {
             {tags.map(({ name, value }) => <Checkbox name={name} value={value} label={name} checked={checkedItems[name]} handleChange={handleCheckboxChange} />)}
           </Card.CardMenu>
           <Card.CardRow>
-            {checkIfChecked()}
+
             {edges.map(({ node }) => {
               const { category, tag } = node;
+
               if (category === menuOption) {
                 return (
-                  <Card.CardRowItem>
-                    <Card.CardHeader modifiers={["textFont", "red"]}>{node.name}</Card.CardHeader>
+                  <Card.CardRowItem modifiers={anyIsTrue(checkedItems) ? !checkIfChecked(tag) && 'transparent' : ''}>
+                    <Card.CardHeader modifiers={["textFont", "red", anyIsTrue(checkedItems) ? checkIfChecked(tag) && "green" : '']}>{node.name}</Card.CardHeader>
                     <Card.CardBody> {node.ingredients}</Card.CardBody>
                   </Card.CardRowItem>
                 )
               }
             })}
           </Card.CardRow>
-
         </Card>
+
       </MenuWrapper>
+      <MenuButton modifiers={["black"]}>Download menu on PDF</MenuButton>
       <Link to="/">Go back to the homepage</Link>
     </Layout >
 

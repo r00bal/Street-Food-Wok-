@@ -2,7 +2,14 @@ import styled from 'styled-components';
 import { applyStyleModifiers } from 'styled-components-modifiers'
 import { Button, LinkButton } from './Buttons'
 import { elevation, above } from '../utilities';
-import { headerFont, textFont, grey, red } from '../utilities'
+import { headerFont, textFont, grey, red, green } from '../utilities'
+
+const CARD_MODIFIERS = {
+ transparent: () => `
+ opacity:0.3;
+ `,
+}
+
 
 const CARDHEADER_MODIFIERS = {
  textFont: () => `
@@ -10,6 +17,9 @@ const CARDHEADER_MODIFIERS = {
  `,
  red: () => `
  color: ${red};
+ `,
+ green: () => `
+ color: ${green};
  `
 }
 
@@ -17,9 +27,11 @@ export const Card = styled.div`
 display: flex;
 flex-direction: column;
 /* justify-content:center; */
+
 align-items:center;
 padding: 2rem 0 2rem 0;
 ${elevation[0]};
+
 
 `
 
@@ -45,6 +57,7 @@ position: relative;
 padding: 30px 55px 15px;
 text-align: center;
 width:100%;
+transition: all .5s ease;
 &:after {
  content: "";
     width: 80%;
@@ -60,6 +73,7 @@ ${above.med`
 flex: 0 0 50%;
 max-width:50%;
     `}
+    ${applyStyleModifiers(CARD_MODIFIERS)};
 `
 
 
@@ -79,6 +93,7 @@ const CardHeader = styled.h2`
 font-size: 2rem;
 padding: 0 2rem 0 2rem;
 font-weight:400;
+transition: all .2s ease;
 ${headerFont};
 ${applyStyleModifiers(CARDHEADER_MODIFIERS)};
 `

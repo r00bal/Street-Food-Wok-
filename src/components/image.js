@@ -18,6 +18,7 @@ const ImageFrame = styled(Img)`
  width: 100%;
  /* width:${({ width }) => width ? `${width}px` : `auto`};
  height:${({ height }) => height ? `${height}px` : `auto`}; */
+ 
  `
 
 const Image = ({ width, height, fluid, cssProps }) => {
