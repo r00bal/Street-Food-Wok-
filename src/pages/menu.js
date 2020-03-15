@@ -116,14 +116,7 @@ const MenuPage = ({ location }) => {
       node {
         id
         fluid {
-          base64
-          tracedSVG
-          aspectRatio
-          width
-          height
-          src
-          srcSet
-          sizes
+          ...GatsbyDatoCmsFluid
         }
       }
     }
@@ -169,7 +162,7 @@ const MenuPage = ({ location }) => {
 
   return (
     <Layout location={location} stick="stick" headerTitle={"Menu"}>
-      <SEO title="Page two" />
+      <SEO title="Menu Card" />
       {windowWidth > size.med
         ?
         <StyledButtonList
@@ -180,27 +173,21 @@ const MenuPage = ({ location }) => {
         : <StyledSelectList options={menu} state={menuOption} setState={setMenuOption} />}
       <MenuWrapper>
         <MenuImage>
-
           <Image fluid={fluid} cssProps={`
-
           height:550px;
           max-width:300px;
           margin: 0 2rem 0 0;
-
           `} />
         </MenuImage>
         <Card css={`
             width:100%;
     `}>
           <Card.CardMenu>
-
             {tags.map(({ name, value }) => <Checkbox name={name} value={value} label={name} checked={checkedItems[name]} handleChange={handleCheckboxChange} />)}
           </Card.CardMenu>
           <Card.CardRow>
-
             {edges.map(({ node }) => {
               const { category, tag } = node;
-
               if (category === menuOption) {
                 return (
                   <Card.CardRowItem modifiers={anyIsTrue(checkedItems) ? !checkIfChecked(tag) && 'transparent' : ''}>
@@ -212,9 +199,8 @@ const MenuPage = ({ location }) => {
             })}
           </Card.CardRow>
         </Card>
-
       </MenuWrapper>
-      <MenuButton modifiers={["black"]}>Download menu on PDF</MenuButton>
+      <MenuButton>Download menu on PDF</MenuButton>
       <Link to="/">Go back to the homepage</Link>
     </Layout >
 
