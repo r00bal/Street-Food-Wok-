@@ -27,7 +27,7 @@ const BUTTON_MODIFIERS = {
     }
     `,
     wide: () => `
-    min-width:100%;
+    min-width:50%;
     `,
     D3: ({ active }) => `
     ${elevation[1]}
@@ -60,6 +60,7 @@ cursor: pointer;
 transition: all 0.3s ease;
 text-transform: uppercase;
 text-decoration: none;
+text-align:center;
 ${textFont};
 &:hover {
     color: white;
