@@ -4,7 +4,8 @@ import { Card } from '../elements'
 import { above } from '../utilities'
 import Image from '../image'
 
-const Wrapper = styled.div`
+export const CardWrapper = styled.div`
+position:relative;
 display:flex;
 flex-flow:column wrap;
 justify-content: space-around;
@@ -16,33 +17,35 @@ ${above.med`
 `
 
 
-export default function ContentBox({ id, title, copy, cta, url, image, index }) {
- const reverse = index % 2 === 0;
- return (
-  <Wrapper key={id} reverse={reverse}>
-   <Card css={`
-            max-width:475px;
-            margin:0 0 4rem 0;
+export default function ContentBox({ id, title, copy, cta, url, image, index, CardCss, ImageCss }) {
+      const reverse = index % 2 === 0;
+      return (
+            <CardWrapper key={id} reverse={reverse}>
+                  <Card css={`${CardCss}
             ${above.med`
      margin:1rem;
     `}
           `}>
-    <Card.CardHeader>
-     {title}
-    </Card.CardHeader>
-    <Card.CardBody>
-     {copy}
-    </Card.CardBody>
-    <Card.CardLinkButton to={url}>
-     {cta}
-    </Card.CardLinkButton>
-   </Card>
-   <Image fluid={image}
-    cssProps={`
-          height:550px;
-          max-width:500px;
-        `} />
-  </Wrapper>
- )
+                        {title && (<Card.CardHeader>
+                              {title}
+                        </Card.CardHeader>)}
+                        {copy && (
+                              <Card.CardBody>
+                                    {copy}
+                              </Card.CardBody>
+                        )}
+                        {url && (
+                              <Card.CardLinkButton to={url}>
+                                    {cta}
+                              </Card.CardLinkButton>
+                        )}
+                  </Card>
+                  {image && (
+                        <Image fluid={image}
+                              cssProps={ImageCss} />
+                  )}
+
+            </CardWrapper>
+      )
 
 }

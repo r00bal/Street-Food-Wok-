@@ -3,13 +3,14 @@ import { useStaticQuery, graphql } from "gatsby"
 import { size } from '../components/utilities'
 import { ContentBox } from "../components/layouts"
 import { useWindowSize } from '../components/hooks/useWindowSize'
+import { above } from '../components/utilities'
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 const IndexPage = ({ location }) => {
   const { allDatoCmsCard } = useStaticQuery(graphql`
   query index {
-    allDatoCmsCard {
+    allDatoCmsCard(filter: {cardTag: {eq: "home"}}) {
 	  edges {
 	    node {
 	      id
@@ -45,7 +46,15 @@ const IndexPage = ({ location }) => {
             copy={copy}
             cta={cta}
             url={url}
-            image={image.fluid} />
+            image={image.fluid}
+            CardCss={
+              ` max-width:475px;
+            margin:0 0 4rem 0;`
+            }
+            ImageCss={`
+            height:550px;
+            max-width:500px;
+          `} />
         )
       })}
     </Layout >

@@ -4,7 +4,7 @@ import { animated, useSpring } from 'react-spring';
 // You can use this `calc` method to increase the impact
 // of the effect by playing around with the values and units.
 
-const calc = o => `translateY(${o * 0.1}px)`;
+const calc = o => `translateY(${o * 0.2}px)`;
 
 const Parallax = ({ children, style }) => {
  const ref = useRef();

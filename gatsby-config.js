@@ -24,6 +24,13 @@ module.exports = {
       resolve: `gatsby-transformer-remark`,
 
     },
+    // {
+    //   resolve: `gatsby-source-googlemaps-static`,
+    //   options: {
+    //     key: process.env.GOOGLE_MAPS_API,
+    //     center: "Chicago, IL",
+    //   },
+    // },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
