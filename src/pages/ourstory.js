@@ -1,14 +1,11 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import { Link } from "gatsby"
-import styled from 'styled-components'
 import { useWindowSize } from '../components/hooks/useWindowSize'
 import { size } from '../components/utilities'
 import Layout from "../components/layout"
-import { Card } from '../components/elements'
-import { CardWrapper } from '../components/layouts/ContentBox'
+import { ShowHideElement } from '../components/animations'
 import { ContentBox } from '../components/layouts'
-import Image from '../components/image'
 import SEO from "../components/seo"
 
 
@@ -81,28 +78,35 @@ const OurStory = ({ location }) => {
       {allDatoCmsCard.edges.map(({ node }, index) => {
         const { id, title, copy, image } = node;
         return (
-          <ContentBox
-            key={id}
-            index={index}
-            mobile={mobile}
-            id={id}
-            title={title}
-            copy={copy}
-            image={image.fluid}
-            CardCss={
-              `max-width:375px;
+
+
+          <ShowHideElement title={title}>
+            <ContentBox
+              key={id}
+              index={index}
+              mobile={mobile}
+              id={id}
+              title={title}
+              copy={copy}
+              image={image.fluid}
+              CardCss={
+                `max-width:375px;
             margin:0 0 4rem 0;
             background:white;
             z-index:2;
             ${!mobile ? contentBoxCss[index]['card'] : ``}
             `
-            }
-            ImageCss={`
+              }
+              ImageCss={`
             height:450px;
             max-width:400px;
             z-index:1;
             ${!mobile ? contentBoxCss[index]['image'] : ``}
           `} />
+          </ShowHideElement>
+
+
+
 
         )
       })}
