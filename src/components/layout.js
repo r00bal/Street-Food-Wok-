@@ -21,6 +21,10 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 library.add(fab)
 
+const BackgroundImageFixed = styled(BackgroundImage)`
+background-attachment:fixed;
+`
+
 
 const Main = styled.main`
 width: 100%;
@@ -163,7 +167,7 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
           <Navigation open={isNavOpen} toggleOpen={setNavOpen} mobile={smallScreens()} animation={navAnimationMobile} /> : <Navigation />
         : <Navigation modifiers="static" />}
       {image && (
-        <BackgroundImage
+        <BackgroundImageFixed
           fluid={image}
         >
           <Header image={image} ref={refHeader}>
@@ -171,7 +175,7 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
               <Heading>{title}</Heading>
             </Parallax>
           </Header>
-        </BackgroundImage>
+        </BackgroundImageFixed>
       )}
 
       {location ?
