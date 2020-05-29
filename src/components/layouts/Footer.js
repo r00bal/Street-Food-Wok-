@@ -49,7 +49,7 @@ const SpanFooter = styled.span`
  
 `
 
-const Footer = ({ siteAuthor, className }) => (
+const Footer = ({ siteAuthor, className, cssProps }) => (
   <footer className={className}>
     <Container>
       <FooterNav>
@@ -79,6 +79,7 @@ Footer.defaultProps = {
 }
 
 export default styled(Footer)`
+${({ cssProps }) => cssProps};
  flex-shrink: 0;
   background-color: ${black};
    

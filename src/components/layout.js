@@ -7,10 +7,10 @@
 import React, { useState, useRef, useEffect } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import GlobalStyle from '../Global'
 import BackgroundImage from 'gatsby-background-image-es5'
-import { useSpring, config } from 'react-spring'
+import { useSpring, config, animated } from 'react-spring'
 import { Waypoint } from 'react-waypoint'
 import Parallax from './hooks/Parallax'
 import { useWindowSize } from './hooks/useWindowSize'
@@ -19,18 +19,28 @@ import { Navigation, Footer, Contact } from './layouts'
 import { DynamicQueryHeader, above, size } from './utilities'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
+import Img from "gatsby-image"
 library.add(fab)
 
-const BackgroundImageFixed = styled(BackgroundImage)`
+const BackgroundImageFixed = styled(Img)`
+position:absolute;
+width:100%;
+height:100%;
 background-attachment:fixed;
+transition: all 0.1s;
+/* &:hover { 
+ transform:scale(1.1);
+} */
 `
 
 
 const Main = styled.main`
+z-index:2;
+background-color: #fff;
 width: 100%;
 flex: 1 0 auto;
-margin-top: 5rem;
-margin-bottom: 5rem;
+padding-top: 5rem;
+padding-bottom: 5rem;
 `
 const LayoutContainer = styled(Container)`
 display: flex;
@@ -135,6 +145,13 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
     });
   });
 
+  const { y } = useSpring({
+    y: 0,
+    from: {
+      y: -500,
+    },
+    config: config.stiff
+  })
 
 
   const navAnimationDesktop = useSpring({
@@ -158,29 +175,39 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
         <MenuIcon open={isNavOpen} />
       </MenuButton>
 
-      {/* 1) if there is no staticHeader props (not index page - main page) OR there is small screen width - mobile devices - then:
-      - show mobile navigation for mobile - small width screens 
+      {/* 1) if there is no staticHeader props (not index page) OR there is small screen width then:
+      - show mobile navigation for small width screens 
       - or desktop navigation on the large width devices 
-      2) If we are on destktop devices and on the index page then show main page Navigation variation*/}
+      2) If we are on large width devices and on the index page then show main page Navigation - the special one with large icon and positioned at the bottom of the welcome page */}
       {!staticHeader || (smallScreens()) ?
         (smallScreens()) ?
           <Navigation open={isNavOpen} toggleOpen={setNavOpen} mobile={smallScreens()} animation={navAnimationMobile} /> : <Navigation />
         : <Navigation modifiers="static" />}
       {image && (
-        <BackgroundImageFixed
-          fluid={image}
-        >
-          <Header image={image} ref={refHeader}>
+        <>
+
+          <Header>
+            <div>
+              <BackgroundImageFixed
+                imgStyle={{ position: 'fixed' }}
+                durationFadeIn={2000}
+                fluid={image} />
+            </div>
+
             <Parallax style={{ zIndex: '0' }}>
-              <Heading>{title}</Heading>
+              <animated.div style={{ overflow: 'hidden', transform: y.interpolate((y) => `translateY(${y}px`), }}>
+                <Heading>{title}</Heading>
+              </animated.div>
             </Parallax>
           </Header>
-        </BackgroundImageFixed>
-      )}
+        </>
+      )
+      }
 
-      {location ?
-        (location.pathname === '/') ? (!smallScreens()) && <Navigation animation={navAnimationDesktop} open={on} /> : null
-        : null
+      {
+        location ?
+          (location.pathname === '/') ? (!smallScreens()) && <Navigation animation={navAnimationDesktop} open={on} /> : null
+          : null
       }
 
 
@@ -203,7 +230,7 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
           <Contact />
         </LayoutContainer>
       </Main>
-      <Footer siteAuthor={data.site.siteMetadata.author} />
+      <Footer siteAuthor={data.site.siteMetadata.author} cssProps={`z-index:3`} />
     </>
   )
 }

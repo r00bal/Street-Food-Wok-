@@ -3,7 +3,7 @@ import { Link } from "gatsby"
 import { Card } from "../components/elements"
 import styled, { css } from 'styled-components'
 import { above } from '../components/utilities'
-
+import { ShowHideElement } from '../components/animations'
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
@@ -15,24 +15,26 @@ margin:0 0 4rem 0;
 const SecondPage = ({ location }) => (
   <Layout location={location} stick="stick" headerTitle="Make your order">
     <SEO title="Page two" />
-    <Card
-      css={`
+    <ShowHideElement cssProps={`
 max-width: 800px;
 margin: 0 0 4rem 0;
 align-self: center;
 `}>
-      <Card.CardHeader css={OrderMargin}>
-        Don’t have a time to visit us?
+      <Card>
+        <Card.CardHeader css={OrderMargin}>
+          Don’t have a time to visit us?
     </Card.CardHeader>
-      <Card.CardBody css={OrderMargin}>
-        Make an order and we will delivery
-        your favourite dishes right into your place
+        <Card.CardBody css={OrderMargin}>
+          Make an order and we will delivery
+          your favourite dishes right into your place
     </Card.CardBody>
 
-      <Card.CardLinkButton modifiers="wide" href="https://wolt.com/pl/">
-        ORDER
+        <Card.CardLinkButton modifiers="wide" href="https://wolt.com/pl/">
+          ORDER
     </Card.CardLinkButton>
-    </Card>
+      </Card>
+    </ShowHideElement>
+
     <Link to="/">Go back to the homepage</Link>
   </Layout>
 )

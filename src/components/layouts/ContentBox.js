@@ -17,33 +17,11 @@ ${above.med`
 `
 
 
-export default function ContentBox({ id, title, copy, cta, url, image, index, CardCss, ImageCss }) {
+export default function ContentBox({ id, index, children }) {
       const reverse = index % 2 === 0;
       return (
             <CardWrapper key={id} reverse={reverse}>
-                  <Card css={`${CardCss}
-            ${above.med`
-     margin:1rem;
-    `}
-          `}>
-                        {title && (<Card.CardHeader>
-                              {title}
-                        </Card.CardHeader>)}
-                        {copy && (
-                              <Card.CardBody>
-                                    {copy}
-                              </Card.CardBody>
-                        )}
-                        {url && (
-                              <Card.CardLinkButton to={url}>
-                                    {cta}
-                              </Card.CardLinkButton>
-                        )}
-                  </Card>
-                  {image && (
-                        <Image fluid={image}
-                              cssProps={ImageCss} />
-                  )}
+                  {children}
 
             </CardWrapper>
       )

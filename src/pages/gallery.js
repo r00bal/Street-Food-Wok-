@@ -1,11 +1,11 @@
-import React, { useState } from "react"
+import React from "react"
 import { useStaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 import { Link } from "gatsby"
-import { useWindowSize } from '../components/hooks/useWindowSize'
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Image from '../components/image'
+import { ShowHideElement } from '../components/animations'
 
 const GalleryWrapper = styled.div`
 display:flex;
@@ -31,7 +31,6 @@ const Gallery = ({ location }) => {
 }
 ` )
   const { edges } = allDatoCmsAsset;
-  const windowWidth = useWindowSize().width;
   return (
     <Layout location={location} stick="stick" headerTitle="Gallery">
       {console.log(edges)}
@@ -43,16 +42,19 @@ const Gallery = ({ location }) => {
             const eachFour = index % (arr.length / 2);
             const portraitOrientation = eachFour % 3 === 0;
             return (
-              <Image fluid={fluid}
-                cssProps={`
-              flex: 50% 50%;
+              <ShowHideElement cssProps={`flex: 50% 50%;
               align-self:center;
               width:100%;
-              min-width:300px;
+              min-width:300px; max-width:${portraitOrientation ? `400px` : `550px`}`}>
+                <Image fluid={fluid}
+                  cssProps={`
+              
           height:${portraitOrientation ? `550px` : `350px`};
           max-width:${portraitOrientation ? `400px` : `550px`};
           margin: 1rem;
           `} />
+              </ShowHideElement>
+
             )
           }
           )

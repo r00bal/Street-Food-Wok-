@@ -1,9 +1,10 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import { size } from '../components/utilities'
 import { ContentBox } from "../components/layouts"
-import { useWindowSize } from '../components/hooks/useWindowSize'
+import { ShowHideElement } from '../components/animations'
 import { above } from '../components/utilities'
+import { Card } from '../components/elements'
+import Image from '../components/image'
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
@@ -29,8 +30,6 @@ const IndexPage = ({ location }) => {
 }
 ` )
 
-  const windowWidth = useWindowSize().width;
-
   return (
     <Layout location={location} headerTitle="Street Food Wok" staticHeader={true}>
       <SEO title="Street Food Wok" />
@@ -40,21 +39,42 @@ const IndexPage = ({ location }) => {
           <ContentBox
             key={id}
             index={index}
-            mobile={windowWidth < size.med}
-            id={id}
-            title={title}
-            copy={copy}
-            cta={cta}
-            url={url}
-            image={image.fluid}
-            CardCss={
-              ` max-width:475px;
-            margin:0 0 4rem 0;`
-            }
-            ImageCss={`
-            height:550px;
-            max-width:500px;
-          `} />
+          >
+            <ShowHideElement>
+              <Card css={
+                `max-width:475px;
+          margin:0 0 4rem 0;
+            ${above.med`
+     margin:1rem;
+    `}
+          `}>
+                <Card.CardHeader>
+                  {title}
+                </Card.CardHeader>
+
+                <Card.CardBody>
+                  {copy}
+                </Card.CardBody>
+
+
+                <Card.CardLinkButton to={url}>
+                  {cta}
+                </Card.CardLinkButton>
+
+              </Card>
+            </ShowHideElement>
+            <ShowHideElement cssProps={`width:100%; max-width:500px; z-index:1;`}>
+              <Image
+                fluid={image.fluid}
+                cssProps={
+                  `height:550px;
+                max-width:500px;
+              `}
+              />
+            </ShowHideElement>
+
+
+          </ContentBox>
         )
       })}
     </Layout >

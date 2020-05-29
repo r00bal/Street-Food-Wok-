@@ -9,6 +9,7 @@ import { size, anyIsTrue, above } from '../components/utilities'
 import { Button, Select, Card } from "../components/elements"
 import { Checkbox } from "../components/layouts"
 import Image from '../components/image'
+import { ShowHideElement } from '../components/animations'
 
 const menu = ['starters', 'salads', 'wok-fried', 'sides', 'deserts', 'kids', 'drinks', 'pho']
 const tags = [
@@ -90,7 +91,7 @@ const StyledButtonList = ({ options, state, setState }) => (
   </StyledList>
 )
 
-const StyledSelectList = ({ options, setState }) => (
+const StyledSelectList = ({ options, setState, state }) => (
 
   <Select css={`
     margin:0 0 2rem 0;
@@ -98,7 +99,7 @@ const StyledSelectList = ({ options, setState }) => (
     onChange={(e) => {
       setState(e.target.value)
     }}
-  >
+  ><option selected>{state}</option>
     {options.map((option) => (
       <option value={option} >{option}</option>
     ))}
@@ -163,6 +164,8 @@ const MenuPage = ({ location }) => {
   return (
     <Layout location={location} stick="stick" headerTitle={"Menu"}>
       <SEO title="Menu Card" />
+      {/* <ShowHideElement> */}
+
       {windowWidth > size.med
         ?
         <StyledButtonList
@@ -171,36 +174,52 @@ const MenuPage = ({ location }) => {
           setState={setMenuOption}
         />
         : <StyledSelectList options={menu} state={menuOption} setState={setMenuOption} />}
+
+      {/* </ShowHideElement> */}
+
+
       <MenuWrapper>
+
         <MenuImage>
-          <Image fluid={fluid} cssProps={`
-          height:550px;
+          <ShowHideElement cssProps={`
+          width:100%;
           max-width:300px;
           margin: 0 2rem 0 0;
+          `}>
+            <Image fluid={fluid} cssProps={`
+          width:100%;
+          height:550px;
           `} />
+          </ShowHideElement>
+
         </MenuImage>
-        <Card css={`
+        <ShowHideElement>
+          <Card css={`
             width:100%;
     `}>
-          <Card.CardMenu>
-            {tags.map(({ name, value }) => <Checkbox name={name} value={value} label={name} checked={checkedItems[name]} handleChange={handleCheckboxChange} />)}
-          </Card.CardMenu>
-          <Card.CardRow>
-            {edges.map(({ node }) => {
-              const { category, tag } = node;
-              if (category === menuOption) {
-                return (
-                  <Card.CardRowItem modifiers={anyIsTrue(checkedItems) ? !checkIfChecked(tag) && 'transparent' : ''}>
-                    <Card.CardHeader modifiers={["textFont", "red", anyIsTrue(checkedItems) ? checkIfChecked(tag) && "green" : '']}>{node.name}</Card.CardHeader>
-                    <Card.CardBody> {node.ingredients}</Card.CardBody>
-                  </Card.CardRowItem>
-                )
-              }
-            })}
-          </Card.CardRow>
-        </Card>
+            <Card.CardMenu>
+              {tags.map(({ name, value }) => <Checkbox name={name} value={value} label={name} checked={checkedItems[name]} handleChange={handleCheckboxChange} />)}
+            </Card.CardMenu>
+            <Card.CardRow>
+              {edges.map(({ node }) => {
+                const { category, tag } = node;
+                if (category === menuOption) {
+                  return (
+                    <Card.CardRowItem modifiers={anyIsTrue(checkedItems) ? !checkIfChecked(tag) && 'transparent' : ''}>
+                      <Card.CardHeader modifiers={["textFont", "red", anyIsTrue(checkedItems) ? checkIfChecked(tag) && "green" : '']}>{node.name}</Card.CardHeader>
+                      <Card.CardBody> {node.ingredients}</Card.CardBody>
+                    </Card.CardRowItem>
+                  )
+                }
+              })}
+            </Card.CardRow>
+          </Card>
+        </ShowHideElement>
       </MenuWrapper>
+
+
       <MenuButton>Download menu on PDF</MenuButton>
+
       <Link to="/">Go back to the homepage</Link>
     </Layout >
 
