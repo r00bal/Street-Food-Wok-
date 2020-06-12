@@ -8,7 +8,7 @@ const ShowHideElement = ({ children, cssProps }) => {
 
   transform: isVisible ? 'translate3d(0,0,0)' : 'translate3d(0,200px,0)',
   opacity: isVisible ? 1 : 0,
-  delay: 400,
+  delay: 200,
   config: config.slow
 
  })

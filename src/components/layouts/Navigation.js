@@ -3,13 +3,14 @@ import { animated } from 'react-spring'
 import PropTypes from "prop-types"
 import { Link } from 'gatsby'
 import { applyStyleModifiers } from 'styled-components-modifiers'
+import WokAnimation from '../animations/WokAnimation'
 import book from '../assets/img/book.png'
 import delivery from '../assets/img/delivery.png'
 import localisation from '../assets/img/localisation.png'
 import noodlebox from '../assets/img/noodlebox.png'
 import polaroid from '../assets/img/polaroid.png'
 import styled from 'styled-components'
-import { transparentBlack, elevation, fixed, above } from '../utilities'
+import { headerFont, transparentBlack, elevation, fixed, above } from '../utilities'
 
 const pages = [
     { name: 'menu', path: 'menu', img: noodlebox },
@@ -38,6 +39,7 @@ const NAV_MODIFIERS = {
     z-index: 10;
     `
 }
+
 
 const LINK_MODIFIERS = {
     static: () => `
@@ -87,8 +89,41 @@ const LIST_MODIFIERS = {
              visibility:visible; 
             }
         } 
+    `,
+    left: () => `
+    margin-right:auto;
     `
 }
+
+const Logo = styled.h3`
+margin:0;
+color:white;
+opacity:0.6;
+width:100%;
+height:80px;
+display:flex;
+justify-content:center;
+align-items:center;
+transform: translate(-3%,25%);
+position:relative;
+${headerFont};
+span {
+    width:120px;
+    position:absolute;
+    bottom:-10px;
+    ${above.small`
+            width:50px;
+            position:absolute;
+            bottom:0;
+            transform: translate(-15px,0px) rotate(20deg);
+            `} 
+}
+${above.small`
+        width:100px;
+        transform: translate(0%,0%);
+        position:absolute;
+        `} 
+`
 
 const StyledLink = styled(Link)`
        text-decoration: none;
@@ -123,7 +158,7 @@ const StyledLink = styled(Link)`
 
 export const List = styled.ul`
 list-style: none;
-margin:0;
+margin:auto;
 padding:0;
 `
 
@@ -183,19 +218,16 @@ const Navigation = ({ className, animation, modifiers, open = true, toggleOpen =
 
     }, [active]);
 
-    // useEffect(() => {
-    //     console.log('second')
-    //     if (mobile && open) {
-    //         window.addEventListener('keydown', handleKeyDown);
-    //     }
-    //     return () => {
-    //         window.removeEventListener('keydown', handleKeyDown);
-    //     };
-    // }, [open]);
 
     return (
         <animated.nav className={className} style={animation}>
+            {/* {!modifiers && (<Logo mobile={mobile}>
+                <WokAnimation mobile={mobile} />
+                <span>Street Wook</span>
+            </Logo>)} */}
+
             <List>
+
                 {pages.map(({ name, img, path }, index, array) => {
                     const FirstElementRef = index === 0 ? { ref: FirstRef } : {};
                     const LastElementRef = index === array.length - 1 ? { ref: LastRef } : {}
@@ -237,6 +269,7 @@ export default styled(Navigation)`
     ${
     above.small`
     flex-direction: row;
+    justify-content: flex-start;
     height:auto;
     `}
     ${applyStyleModifiers(NAV_MODIFIERS)};

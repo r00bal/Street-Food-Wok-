@@ -13,6 +13,7 @@ import BackgroundImage from 'gatsby-background-image-es5'
 import { useSpring, config, animated } from 'react-spring'
 import { Waypoint } from 'react-waypoint'
 import Parallax from './hooks/Parallax'
+import { ShowHideElement } from './animations'
 import { useWindowSize } from './hooks/useWindowSize'
 import { Container, Header, Heading, MenuIcon } from './elements'
 import { Navigation, Footer, Contact } from './layouts'
@@ -20,10 +21,13 @@ import { DynamicQueryHeader, above, size } from './utilities'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import Img from "gatsby-image"
+import WokAnimation from './animations/WokAnimation'
 library.add(fab)
 
 const BackgroundImageFixed = styled(Img)`
 position:absolute;
+left:0;
+right:0;
 width:100%;
 height:100%;
 background-attachment:fixed;
@@ -98,6 +102,7 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
 
   const [isNavOpen, setNavOpen] = useState(false);
   const [on, toggle] = useState(false)
+  const [isBackgroundLoaded, setIsBackgroundLoaded] = useState(false)
 
 
 
@@ -145,15 +150,29 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
     });
   });
 
+
+  // Animations
+
+  // background scale out animation
+  const { s } = useSpring({
+    s: isBackgroundLoaded ? 1 : 1.2,
+    config: config.slow
+  })
+
+  // heading drop down animation
   const { y } = useSpring({
     y: 0,
     from: {
       y: -500,
     },
-    config: config.stiff
+    config: config.stiff,
+    delay: 500
+
   })
 
 
+
+  // navigation animations
   const navAnimationDesktop = useSpring({
     from: {
       transform: !on ? 'translate3d(0,-100px,0)' : 'translate3d(0,0,0)',
@@ -187,17 +206,21 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
         <>
 
           <Header>
-            <div>
+
+            <animated.div style={{ position: 'absolute', width: '100%', height: '100%', transform: s.interpolate((s) => `scale(${s})`) }}>
               <BackgroundImageFixed
                 imgStyle={{ position: 'fixed' }}
-                durationFadeIn={2000}
-                fluid={image} />
-            </div>
+                fluid={image}
+                onLoad={() => setIsBackgroundLoaded(true)}
+              />
+            </animated.div>
 
             <Parallax style={{ zIndex: '0' }}>
-              <animated.div style={{ overflow: 'hidden', transform: y.interpolate((y) => `translateY(${y}px`), }}>
+              <animated.div style={{ overflow: 'hidden', transform: y.interpolate((y) => `translateY(${y}px)`) }}>
                 <Heading>{title}</Heading>
+
               </animated.div>
+
             </Parallax>
           </Header>
         </>
@@ -227,7 +250,10 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
       <Main>
         <LayoutContainer>
           {children}
-          <Contact />
+          <ShowHideElement>
+            <Contact />
+          </ShowHideElement>
+
         </LayoutContainer>
       </Main>
       <Footer siteAuthor={data.site.siteMetadata.author} cssProps={`z-index:3`} />

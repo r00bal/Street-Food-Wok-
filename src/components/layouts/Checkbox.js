@@ -38,6 +38,7 @@ flex-flow: row nowrap;
 `
 
 const InputCheckbox = styled(Input)`
+min-width: 1px;
 position: absolute; 
   &:hover + ${LabelCheckbox} {
       &:before {

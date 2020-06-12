@@ -12,7 +12,7 @@ padding:15px 45px;
 width: 100%;
 background: ${transparentWhite};
 text-transform: uppercase;
-${({ animation }) => animation}
+${({ animation }) => animation ? animation : ``}
 ${above.small`
      font-size: 4rem;
   
