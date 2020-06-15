@@ -6,6 +6,7 @@ import { applyStyleModifiers } from 'styled-components-modifiers'
 import WokAnimation from '../animations/WokAnimation'
 import book from '../assets/img/book.png'
 import delivery from '../assets/img/delivery.png'
+import wokicon from '../assets/img/wokicon.png'
 import localisation from '../assets/img/localisation.png'
 import noodlebox from '../assets/img/noodlebox.png'
 import polaroid from '../assets/img/polaroid.png'
@@ -13,6 +14,7 @@ import styled from 'styled-components'
 import { headerFont, transparentBlack, elevation, fixed, above } from '../utilities'
 
 const pages = [
+    { name: 'home', path: '', img: wokicon },
     { name: 'menu', path: 'menu', img: noodlebox },
     { name: 'our story', path: 'ourstory', img: book },
     { name: 'gallery', path: 'gallery', img: polaroid },
@@ -221,13 +223,7 @@ const Navigation = ({ className, animation, modifiers, open = true, toggleOpen =
 
     return (
         <animated.nav className={className} style={animation}>
-            {/* {!modifiers && (<Logo mobile={mobile}>
-                <WokAnimation mobile={mobile} />
-                <span>Street Wook</span>
-            </Logo>)} */}
-
             <List>
-
                 {pages.map(({ name, img, path }, index, array) => {
                     const FirstElementRef = index === 0 ? { ref: FirstRef } : {};
                     const LastElementRef = index === array.length - 1 ? { ref: LastRef } : {}
@@ -248,7 +244,6 @@ const Navigation = ({ className, animation, modifiers, open = true, toggleOpen =
                     )
                 })}
             </List>
-
         </animated.nav>
     )
 }

@@ -1,7 +1,9 @@
 import React, { useState } from "react"
 import { useStaticQuery, graphql } from 'gatsby'
 import { Link } from "gatsby"
+import { Waypoint } from 'react-waypoint';
 import styled from 'styled-components'
+import { useTrail, config, animated } from 'react-spring'
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { useWindowSize } from '../components/hooks/useWindowSize'
@@ -35,7 +37,7 @@ const tags = [
   }
 ]
 
-const StyledList = styled.ul`
+const StyledList = styled(animated.ul)`
 margin:0 0 5rem 0;
 padding:0;
 list-style:none;
@@ -73,23 +75,47 @@ max-width:500px;
 margin-bottom:5rem;`
 
 
-const StyledButtonList = ({ options, state, setState }) => (
-  <StyledList>
-    {options.map((option) => (
-      <li id="menu">
-        <Button modifiers="D3"
-          value={option}
-          active={option === state}
-          onClick={(e) => {
-            setState(e.target.value)
-          }}
-        >
-          {option}
-        </Button>
-      </li>
-    ))}
-  </StyledList>
-)
+const StyledButtonList = ({ options, state, setState }) => {
+  const [isVisible, setIsVisible] = useState(false)
+
+  const trail = useTrail(options.length,
+    {
+
+
+      opacity: isVisible ? 1 : 0,
+      y: isVisible ? 0 : 50,
+      from: { opacity: 0, y: 50 },
+      delay: 200,
+      config: { mass: 1, tension: 120, friction: 14 },
+
+    }
+
+  )
+  return (
+    <Waypoint onEnter={() => setIsVisible(true)}>
+      <StyledList>
+        {trail.map(({ y, ...rest }, index) => {
+          const option = options[index];
+          return (
+
+            <animated.li id="menu" style={{ ...rest, transform: y.interpolate(y => `translate(0,${y}px)`) }}>
+              <Button modifiers="D3"
+                value={option}
+                active={option === state}
+                onClick={(e) => {
+                  setState(e.target.value)
+                }}
+              >
+                {option}
+              </Button>
+            </animated.li>
+          )
+        }
+        )}
+      </StyledList>
+    </Waypoint>
+  )
+}
 
 const StyledSelectList = ({ options, setState, state }) => (
 
@@ -139,6 +165,17 @@ const MenuPage = ({ location }) => {
   const windowWidth = useWindowSize().width;
   const [menuOption, setMenuOption] = useState('starters')
   const [checkedItems, setCheckedItems] = useState({})
+
+
+  // const trail = useTrail(items.length,
+  //   {
+
+  //     opacity: on ? 0 : 1,
+  //     transform: on ? 'scale(0.2)' : 'scale(1)'
+
+  //   }
+  // )
+
   const handleCheckboxChange = (e) => {
     const name = e.target.name;
     const isChecked = e.target.checked;
@@ -216,9 +253,7 @@ const MenuPage = ({ location }) => {
           </Card>
         </ShowHideElement>
       </MenuWrapper>
-
-
-      <MenuButton>Download menu on PDF</MenuButton>
+      <ShowHideElement><MenuButton>Download menu on PDF</MenuButton></ShowHideElement>
 
       <Link to="/">Go back to the homepage</Link>
     </Layout >

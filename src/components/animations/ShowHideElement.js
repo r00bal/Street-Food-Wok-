@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import { Waypoint } from 'react-waypoint';
 import { useSpring, config, animated } from 'react-spring'
 
-const ShowHideElement = ({ children, cssProps }) => {
+const ShowHideElement = ({ children, cssProps, delay = 200 }) => {
  const [isVisible, setIsVisible] = useState(false);
  const showHideAnimation = useSpring({
 
   transform: isVisible ? 'translate3d(0,0,0)' : 'translate3d(0,200px,0)',
   opacity: isVisible ? 1 : 0,
-  delay: 200,
+  delay: delay,
   config: config.slow
 
  })

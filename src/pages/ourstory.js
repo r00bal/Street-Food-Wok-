@@ -99,16 +99,12 @@ const OurStory = ({ location }) => {
      margin:1rem;
     `}
           `}>
-
                 <Card.CardHeader>
                   {title}
                 </Card.CardHeader>
-
                 <Card.CardBody>
                   {copy}
                 </Card.CardBody>
-
-
               </Card>
             </ShowHideElement>
             <ShowHideElement cssProps={`width:100%; max-width:400px; z-index:1;`}>
