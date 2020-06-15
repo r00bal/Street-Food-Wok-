@@ -118,18 +118,9 @@ const OurStory = ({ location }) => {
           `}
               />
             </ShowHideElement>
-
-
           </ContentBox>
-
-
-
-
-
-
         )
       })}
-      <Link to="/">Go back to the homepage</Link>
     </Layout >
   )
 }

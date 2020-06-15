@@ -28,14 +28,11 @@ align-self: center;
           Make an order and we will delivery
           your favourite dishes right into your place
     </Card.CardBody>
-
         <Card.CardLinkButton modifiers="wide" href="https://wolt.com/pl/">
           ORDER
     </Card.CardLinkButton>
       </Card>
     </ShowHideElement>
-
-    <Link to="/">Go back to the homepage</Link>
   </Layout>
 )
 

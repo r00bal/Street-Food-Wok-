@@ -11,8 +11,6 @@ const SecondPage = ({ location }) => (
     <ShowHideElement>
       <GoogleMap />
     </ShowHideElement>
-
-    <Link to="/">Go back to the homepage</Link>
   </Layout>
 )
 

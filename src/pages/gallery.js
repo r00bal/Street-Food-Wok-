@@ -47,8 +47,7 @@ const Gallery = ({ location }) => {
               width:100%;
               min-width:300px; max-width:${portraitOrientation ? `400px` : `550px`}`}>
                 <Image fluid={fluid}
-                  cssProps={`
-              
+                  cssProps={`  
           height:${portraitOrientation ? `550px` : `350px`};
           max-width:${portraitOrientation ? `400px` : `550px`};
           margin: 1rem;

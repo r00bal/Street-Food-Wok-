@@ -254,8 +254,6 @@ const MenuPage = ({ location }) => {
         </ShowHideElement>
       </MenuWrapper>
       <ShowHideElement><MenuButton>Download menu on PDF</MenuButton></ShowHideElement>
-
-      <Link to="/">Go back to the homepage</Link>
     </Layout >
 
   )
