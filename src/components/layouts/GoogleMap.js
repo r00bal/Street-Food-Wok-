@@ -16,28 +16,28 @@ width:70px;
 `
 
 function GoogleMap() {
- return (
-  // Important! Always set the container height explicitly
-  <div style={{
-   height: '60vh', width: '60%', margin: '0 auto', marginBottom: '5rem'
-  }}>
-   <GoogleMapReact
-    bootstrapURLKeys={{ key: process.env.GOOGLE_MAPS_API }}
-    defaultCenter={{ lat: 54.51, lng: 18.55 }}
-    defaultZoom={15}
-   >
-    <Marker
-     lat="54.513008"
-     lng="18.550399"
-    >
-     <StyledMarker>
-      <img src={localization} className="MarkerImg" />
+  return (
+    // Important! Always set the container height explicitly
+    <div style={{
+      height: '60vh', width: '60%', margin: '0 auto', marginBottom: '5rem'
+    }}>
+      <GoogleMapReact
+        bootstrapURLKeys={{ key: process.env.GATSBY_GOOGLE_MAPS_API }}
+        defaultCenter={{ lat: 54.51, lng: 18.55 }}
+        defaultZoom={15}
+      >
+        <Marker
+          lat="54.513008"
+          lng="18.550399"
+        >
+          <StyledMarker>
+            <img src={localization} className="MarkerImg" />
       STREET WOK</StyledMarker>
 
-    </Marker>
-   </GoogleMapReact>
-  </div>
- );
+        </Marker>
+      </GoogleMapReact>
+    </div>
+  );
 
 }
 
