@@ -9,12 +9,12 @@ import delivery from '../assets/img/delivery.png'
 import localisation from '../assets/img/localisation.png'
 import noodlebox from '../assets/img/noodlebox.png'
 import polaroid from '../assets/img/polaroid.png'
-import wokicon from '../assets/img/wokicon.png'
+import veggies from '../assets/img/veggies.png'
 import styled from 'styled-components'
 import { headerFont, transparentBlack, elevation, fixed, above } from '../utilities'
 
 const pages = [
-    { name: 'home', path: '', img: wokicon },
+    { name: 'home', path: '', img: veggies },
     { name: 'menu', path: 'menu', img: noodlebox },
     { name: 'our story', path: 'ourstory', img: book },
     { name: 'gallery', path: 'gallery', img: polaroid },
