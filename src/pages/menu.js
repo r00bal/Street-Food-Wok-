@@ -11,7 +11,7 @@ import { size, anyIsTrue, above } from '../components/utilities'
 import { Button, Select, Card } from "../components/elements"
 import { Checkbox } from "../components/layouts"
 import Image from '../components/image'
-import { ShowHideElement } from '../components/animations'
+import { SlideIn } from '../components/animations'
 
 const menu = ['starters', 'salads', 'wok-fried', 'sides', 'deserts', 'kids', 'drinks', 'pho']
 const tags = [
@@ -78,27 +78,13 @@ margin-bottom:5rem;`
 const StyledButtonList = ({ options, state, setState }) => {
   const [isVisible, setIsVisible] = useState(false)
 
-  const trail = useTrail(options.length,
-    {
-
-
-      opacity: isVisible ? 1 : 0,
-      y: isVisible ? 0 : 50,
-      from: { opacity: 0, y: 50 },
-      delay: 200,
-      config: { mass: 1, tension: 120, friction: 14 },
-
-    }
-
-  )
   return (
     <Waypoint onEnter={() => setIsVisible(true)}>
       <StyledList>
-        {trail.map(({ y, ...rest }, index) => {
-          const option = options[index];
+        {menu.map((option) => {
           return (
 
-            <animated.li id="menu" style={{ ...rest, transform: y.interpolate(y => `translate(0,${y}px)`) }}>
+            <li id="menu">
               <Button modifiers="D3"
                 value={option}
                 active={option === state}
@@ -108,7 +94,7 @@ const StyledButtonList = ({ options, state, setState }) => {
               >
                 {option}
               </Button>
-            </animated.li>
+            </li>
           )
         }
         )}
@@ -201,7 +187,7 @@ const MenuPage = ({ location }) => {
   return (
     <Layout location={location} stick="stick" headerTitle={"Menu"}>
       <SEO title="Menu Card" />
-      {/* <ShowHideElement> */}
+      {/* <SlideIn> */}
 
       {windowWidth > size.med
         ?
@@ -212,13 +198,13 @@ const MenuPage = ({ location }) => {
         />
         : <StyledSelectList options={menu} state={menuOption} setState={setMenuOption} />}
 
-      {/* </ShowHideElement> */}
+      {/* </SlideIn> */}
 
 
       <MenuWrapper>
 
         <MenuImage>
-          <ShowHideElement cssProps={`
+          <SlideIn from="left" delay={400} cssProps={`
           width:100%;
           max-width:300px;
           margin: 0 2rem 0 0;
@@ -227,10 +213,10 @@ const MenuPage = ({ location }) => {
           width:100%;
           height:550px;
           `} />
-          </ShowHideElement>
+          </SlideIn>
 
         </MenuImage>
-        <ShowHideElement>
+        <SlideIn from="right" delay={400}>
           <Card css={`
             width:100%;
     `}>
@@ -251,9 +237,9 @@ const MenuPage = ({ location }) => {
               })}
             </Card.CardRow>
           </Card>
-        </ShowHideElement>
+        </SlideIn>
       </MenuWrapper>
-      <ShowHideElement><MenuButton>Download menu on PDF</MenuButton></ShowHideElement>
+      <MenuButton>Download menu on PDF</MenuButton>
     </Layout >
 
   )

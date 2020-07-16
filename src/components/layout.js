@@ -13,7 +13,7 @@ import BackgroundImage from 'gatsby-background-image-es5'
 import { useSpring, config, animated } from 'react-spring'
 import { Waypoint } from 'react-waypoint'
 import Parallax from './hooks/Parallax'
-import { ShowHideElement } from './animations'
+import { SlideIn } from './animations'
 import { useWindowSize } from './hooks/useWindowSize'
 import { Container, Header, Heading, MenuIcon } from './elements'
 import { Navigation, Footer, Contact } from './layouts'
@@ -250,9 +250,9 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
       <Main>
         <LayoutContainer>
           {children}
-          <ShowHideElement>
-            <Contact />
-          </ShowHideElement>
+
+          <Contact />
+
 
         </LayoutContainer>
       </Main>

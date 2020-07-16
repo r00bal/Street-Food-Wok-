@@ -7,7 +7,7 @@ import { above } from '../components/utilities'
 import Layout from "../components/layout"
 import { Card } from '../components/elements'
 import Image from '../components/image'
-import { ShowHideElement } from '../components/animations'
+import { SlideIn } from '../components/animations'
 import { ContentBox } from '../components/layouts'
 import SEO from "../components/seo"
 
@@ -88,7 +88,7 @@ const OurStory = ({ location }) => {
             key={id}
             index={index}
           >
-            <ShowHideElement cssProps={`z-index:2;`}>
+            <SlideIn cssProps={`z-index:2;`}>
               <Card css={
                 `max-width:375px;
               margin:0 0 4rem 0;
@@ -106,8 +106,8 @@ const OurStory = ({ location }) => {
                   {copy}
                 </Card.CardBody>
               </Card>
-            </ShowHideElement>
-            <ShowHideElement cssProps={`width:100%; max-width:400px; z-index:1;`}>
+            </SlideIn>
+            <SlideIn cssProps={`width:100%; max-width:400px; z-index:1;`}>
               <Image
                 fluid={image.fluid}
                 cssProps={`
@@ -117,7 +117,7 @@ const OurStory = ({ location }) => {
             ${!mobile ? contentBoxCss[index]['image'] : ``}
           `}
               />
-            </ShowHideElement>
+            </SlideIn>
           </ContentBox>
         )
       })}

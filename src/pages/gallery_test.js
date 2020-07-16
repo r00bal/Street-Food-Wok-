@@ -4,8 +4,7 @@ import styled from 'styled-components'
 import { Link } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import AnimatedImage from '../components/AnimatedImage'
-import { ShowHideElement } from '../components/animations'
+import { SlideIn, AnimatedImage } from '../components/animations'
 
 const GalleryWrapper = styled.div`
 display:flex;

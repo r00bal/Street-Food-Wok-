@@ -1,3 +1,5 @@
-import ShowHideElement from './ShowHideElement';
+import SlideIn from './SlideIn';
+import AnimatedImage from './AnimatedImage';
+import SlideInProps from './SlideInProps';
 
-export { ShowHideElement }
+export { SlideIn, AnimatedImage, SlideInProps }
