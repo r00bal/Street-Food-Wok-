@@ -1,7 +1,7 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import { ContentBox } from "../components/layouts"
-import { SlideIn, SlideInProps, AnimatedImage } from '../components/animations'
+import { SlideIn, SlideInProps, AnimatedImage, ShowElementTrial } from '../components/animations'
 import { above } from '../components/utilities'
 import { Card } from '../components/elements'
 import Image from '../components/image'
@@ -46,32 +46,36 @@ const Test = ({ location }) => {
 
                 <Card css={
                   `max-width:475px;
-          margin:0 0 4rem 0;
-            ${above.med`
-     margin:1rem;
-    `}
-          `}>
-                  <Card.CardHeader>
-                    {title}
-                  </Card.CardHeader>
-                  {console.log(isVisible)}
-
-                  <Card.CardBody>
-                    {copy}
-                  </Card.CardBody>
-
-
-                  <Card.CardLinkButton to={url}>
-                    {cta}
-                  </Card.CardLinkButton>
+                   margin:0 0 4rem 0;
+                   min-height:300px;
+                  ${above.med`
+                  margin:1rem;
+                  `}
+                 `}>
+                  <ShowElementTrial isVisible={isVisible}>
+                    <Card.CardHeader>
+                      {title}
+                    </Card.CardHeader>
+                    {console.log(isVisible)}
+                    <Card.CardBody>
+                      {copy}
+                    </Card.CardBody>
+                    <Card.CardLinkButton to={url}>
+                      {cta}
+                    </Card.CardLinkButton>
+                  </ShowElementTrial>
 
                 </Card>
 
               )}
 
             </SlideInProps>
-            <AnimatedImage fluid={image.fluid} cssProps={`width:100%; max-width:500px; z-index:1; height:550px;
-                max-width:500px;`} />
+            <AnimatedImage fluid={image.fluid} cssProps={`
+            width:100%; 
+            max-width:500px; 
+            z-index:1; 
+            height:550px;
+            max-width:500px;`} />
 
 
           </ContentBox>

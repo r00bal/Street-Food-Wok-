@@ -65,14 +65,16 @@ const AnimatedImage = ({ cssProps, fluid }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const { y } = useSpring({
+    opacity: isVisible ? 1 : 0,
     y: isVisible ? 0 : 300,
-    from: { y: 300 },
+    from: { y: 300, opacity: 0 },
     delay: 50,
     config: { mass: 5, tension: 100, friction: 60 }
   })
   const { yi } = useSpring({
+    opacity: isVisible ? 1 : 0,
     yi: isVisible ? -15 : -2,
-    from: { yi: -2 },
+    from: { yi: -2, opacity: 0 },
     delay: 150,
     config: { mass: 1, tension: 180, friction: 150 }
   })

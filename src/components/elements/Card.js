@@ -1,24 +1,25 @@
 import styled from 'styled-components';
+import { animated } from 'react-spring'
 import { applyStyleModifiers } from 'styled-components-modifiers'
 import { Button, LinkButton } from './Buttons'
 import { elevation, above } from '../utilities';
 import { headerFont, textFont, grey, red, green } from '../utilities'
 
 const CARD_MODIFIERS = {
- transparent: () => `
+    transparent: () => `
  opacity:0.3;
  `,
 }
 
 
 const CARDHEADER_MODIFIERS = {
- textFont: () => `
+    textFont: () => `
  ${textFont};
  `,
- red: () => `
+    red: () => `
  color: ${red};
  `,
- green: () => `
+    green: () => `
  color: ${green};
  `
 }
@@ -89,7 +90,7 @@ const CardLinkButton = styled(LinkButton)`
 }
 `
 
-const CardHeader = styled.h2`
+const CardHeader = styled(animated.h2)`
 font-size: 2rem;
 padding: 0 2rem 0 2rem;
 font-weight:400;
@@ -99,7 +100,7 @@ ${applyStyleModifiers(CARDHEADER_MODIFIERS)};
 `
 
 
-const CardBody = styled.p`
+const CardBody = styled(animated.p)`
 padding: 0 2rem 0 2rem;
 font-size: 1.2rem;
 font-weight:400;

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { animated } from 'react-spring'
 import { elevation, textFont, red, black } from '../utilities'
 import { applyStyleModifiers } from 'styled-components-modifiers'
 import { Link } from "gatsby"
@@ -48,7 +49,7 @@ cursor: pointer;
 color: inherit;
 `
 
-export const Button = styled.button`
+export const Button = styled(animated.button)`
 /* width: fit-content;
 min-width:100px; */
 padding: 10px 20px;
