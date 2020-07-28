@@ -51,16 +51,12 @@ const IndexPage = ({ location }) => {
                 <Card.CardHeader>
                   {title}
                 </Card.CardHeader>
-
                 <Card.CardBody>
                   {copy}
                 </Card.CardBody>
-
-
                 <Card.CardLinkButton to={url}>
                   {cta}
                 </Card.CardLinkButton>
-
               </Card>
             </SlideIn>
             <SlideIn cssProps={`width:100%; max-width:500px; z-index:1;`}>
@@ -72,8 +68,6 @@ const IndexPage = ({ location }) => {
               `}
               />
             </SlideIn>
-
-
           </ContentBox>
         )
       })}

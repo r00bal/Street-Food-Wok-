@@ -24,7 +24,7 @@ import Img from "gatsby-image"
 import WokAnimation from './animations/WokAnimation'
 library.add(fab)
 
-const BackgroundImageFixed = styled(Img)`
+const BackgroundImageFixed = styled(BackgroundImage)`
 position:absolute;
 left:0;
 right:0;
