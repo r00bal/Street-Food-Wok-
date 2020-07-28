@@ -1,6 +1,6 @@
 import SlideIn from './SlideIn';
 import AnimatedImage from './AnimatedImage';
-import SlideInProps from './SlideInProps';
+import Visible from './Visible';
 import ShowElementTrial from './ShowElementTrial';
 
-export { SlideIn, AnimatedImage, SlideInProps, ShowElementTrial }
+export { SlideIn, AnimatedImage, Visible, ShowElementTrial }

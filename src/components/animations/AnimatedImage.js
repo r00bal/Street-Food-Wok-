@@ -24,7 +24,7 @@ height:140%;
 const Wrapper = styled(animated.div)`
 display:flex;
 padding:10px;
-box-shadow:0px 0px 0px 1.5px black;
+/* box-shadow:0px 0px 0px 1.5px black; */
 /* border: 1.5px solid black; */
 overflow: hidden;
 z-index:4;
@@ -61,27 +61,33 @@ z-index:2;
 `
 
 
-const AnimatedImage = ({ cssProps, fluid }) => {
+const AnimatedImage = ({ cssProps, fluid, delay = 50 }) => {
   const [isVisible, setIsVisible] = useState(false);
 
-  const { y } = useSpring({
-    opacity: isVisible ? 1 : 0,
+  const { y, o, s } = useSpring({
+    s: isVisible ? 2 : 0,
+    o: isVisible ? 1 : 0,
     y: isVisible ? 0 : 300,
-    from: { y: 300, opacity: 0 },
+    from: { y: 300, o: 0, s: 0 },
     delay: 50,
     config: { mass: 5, tension: 100, friction: 60 }
   })
-  const { yi } = useSpring({
-    opacity: isVisible ? 1 : 0,
+  const { yi, oi } = useSpring({
+
     yi: isVisible ? -15 : -2,
-    from: { yi: -2, opacity: 0 },
-    delay: 150,
+    from: { yi: -2 },
+    delay: delay + 100,
     config: { mass: 1, tension: 180, friction: 150 }
   })
 
   return (
     <Waypoint onEnter={() => setIsVisible(true)}>
-      <Wrapper css={cssProps} style={{ transform: y.interpolate((y) => `translateY(${y}px)`) }}>
+      <Wrapper css={cssProps} style={{
+        boxShadow: s.interpolate((s) => `0px 0px 0px ${s}px black`),
+        opacity: o,
+        transform: y.interpolate((y) => `translateY(${y}px)`),
+
+      }}>
         <Animation style={{ transform: yi.interpolate((yi) => `translateY(${yi}%)`) }}>
           <Image fluid={fluid} />
         </Animation>

@@ -10,6 +10,7 @@ const ShowElementTrial = ({ children, isVisible }) => {
  const elements = React.Children.toArray(children);
  const trail = useTrail(elements.length, {
   config: config.slow,
+  delay: 100,
   opacity: isVisible ? 1 : 0,
   x: isVisible ? 0 : 50,
   height: isVisible ? 80 : 0,

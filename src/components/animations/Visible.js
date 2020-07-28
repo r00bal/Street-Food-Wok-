@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Waypoint } from 'react-waypoint';
 
 
-const SlideInProps = ({ children, cssProps, delay = 50, from = "down" }) => {
+const Visible = ({ children, cssProps, delay = 50, from = "down" }) => {
  const [isVisible, setIsVisible] = useState(false);
 
  const handleEnter = () => {
@@ -18,4 +18,4 @@ const SlideInProps = ({ children, cssProps, delay = 50, from = "down" }) => {
  )
 }
 
-export default SlideInProps;
+export default Visible;
