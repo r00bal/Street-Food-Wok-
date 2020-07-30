@@ -5,7 +5,7 @@ import { Link } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Image from '../components/image'
-import { SlideIn } from '../components/animations'
+import { SlideIn, Visible, AnimatedImage, ShowElementTrial } from '../components/animations'
 
 const GalleryWrapper = styled.div`
 display:flex;
@@ -42,17 +42,14 @@ const Gallery = ({ location }) => {
             const eachFour = index % (arr.length / 2);
             const portraitOrientation = eachFour % 3 === 0;
             return (
-              <SlideIn cssProps={`flex: 50% 50%;
+              <AnimatedImage fluid={fluid} cssProps={`  
+              flex: 50% 50%;
               align-self:center;
               width:100%;
-              min-width:300px; max-width:${portraitOrientation ? `400px` : `550px`}`}>
-                <Image fluid={fluid}
-                  cssProps={`  
           height:${portraitOrientation ? `550px` : `350px`};
           max-width:${portraitOrientation ? `400px` : `550px`};
           margin: 1rem;
           `} />
-              </SlideIn>
 
             )
           }

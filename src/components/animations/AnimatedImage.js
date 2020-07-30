@@ -61,7 +61,7 @@ z-index:2;
 `
 
 
-const AnimatedImage = ({ cssProps, fluid, delay = 50 }) => {
+const AnimatedImage = ({ cssProps, fluid, delay = 50, }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const { y, o, s } = useSpring({
@@ -69,10 +69,10 @@ const AnimatedImage = ({ cssProps, fluid, delay = 50 }) => {
     o: isVisible ? 1 : 0,
     y: isVisible ? 0 : 300,
     from: { y: 300, o: 0, s: 0 },
-    delay: 50,
+    delay: delay,
     config: { mass: 5, tension: 100, friction: 60 }
   })
-  const { yi, oi } = useSpring({
+  const { yi } = useSpring({
 
     yi: isVisible ? -15 : -2,
     from: { yi: -2 },

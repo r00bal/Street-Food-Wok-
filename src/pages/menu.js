@@ -199,8 +199,6 @@ const MenuPage = ({ location }) => {
         : <StyledSelectList options={menu} state={menuOption} setState={setMenuOption} />}
 
       {/* </SlideIn> */}
-
-
       <MenuWrapper>
 
         <MenuImage>
