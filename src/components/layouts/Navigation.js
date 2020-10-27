@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react'
+import { useStaticQuery, graphql } from 'gatsby'
 import { animated } from 'react-spring'
 import PropTypes from "prop-types"
 import { Link } from 'gatsby'
+import Img from "gatsby-image"
 import { applyStyleModifiers } from 'styled-components-modifiers'
-import WokAnimation from '../animations/WokAnimation'
 import book from '../assets/img/book.png'
 import delivery from '../assets/img/delivery.png'
 import localisation from '../assets/img/localisation.png'
@@ -14,12 +15,12 @@ import styled from 'styled-components'
 import { headerFont, transparentBlack, elevation, fixed, above } from '../utilities'
 
 const pages = [
-    { name: 'home', path: '', img: veggies },
-    { name: 'menu', path: 'menu', img: noodlebox },
-    { name: 'our story', path: 'ourstory', img: book },
-    { name: 'gallery', path: 'gallery', img: polaroid },
-    { name: 'order', path: 'order', img: delivery },
-    { name: 'find us', path: 'findus', img: localisation }
+    { name: 'home', path: '', img: "veggies", src: veggies },
+    { name: 'menu', path: 'menu', img: "noodlebox", src: noodlebox },
+    { name: 'our story', path: 'ourstory', img: "book", src: book },
+    { name: 'gallery', path: 'gallery', img: "polaroid", src: polaroid },
+    { name: 'order', path: 'order', img: "delivery", src: delivery },
+    { name: 'find us', path: 'findus', img: "localisation", src: localisation }
 ]
 
 const NAV_MODIFIERS = {
@@ -133,6 +134,9 @@ const StyledLink = styled(Link)`
        position:relative;
        color:white;   
         .LinkImg {
+            display:flex;
+            justify-content:center;
+            align-items:center;
             top: 0;
             bottom: 0;
             margin: auto;
@@ -184,9 +188,26 @@ const ListElement = styled.li`
 `
 
 const Navigation = ({ className, animation, modifiers, open = true, toggleOpen = null, mobile = false }) => {
+    const { allDatoCmsAsset } = useStaticQuery(graphql`
+    query navIcons {
+        allDatoCmsAsset(filter: {tags: {eq: "nav"}}) {
+    edges {
+      node {
+        id
+        basename
+        fluid(maxWidth: 80) {
+         ...GatsbyDatoCmsFluid_noBase64
+          
+        }
+      }
+    }
+  }
+  }
+  ` )
 
     const [active, setActive] = useState(null)
     const [key, setKey] = useState()
+    const [imgLoaded, setImgLoaded] = useState({})
 
     const FirstRef = useRef();
     const LastRef = useRef();
@@ -195,10 +216,6 @@ const Navigation = ({ className, animation, modifiers, open = true, toggleOpen =
         if (!mobile) return
         const { keyCode, shiftKey } = e;
         const { activeElement } = document;
-        console.log('handleKeyDown')
-        // if (keyCode === 27 && toggleOpen) {
-        //     toggleOpen(false)
-        // } 
         if (keyCode === 9 && !shiftKey) {
             setActive(activeElement)
             setKey('next')
@@ -211,7 +228,7 @@ const Navigation = ({ className, animation, modifiers, open = true, toggleOpen =
 
     useEffect(() => {
         if (!mobile) return
-        console.log('first')
+
         if (active === LastRef.current && key === 'next') {
             FirstRef.current.focus()
         } else if (active === FirstRef.current && key === 'prev') {
@@ -223,10 +240,15 @@ const Navigation = ({ className, animation, modifiers, open = true, toggleOpen =
 
     return (
         <animated.nav className={className} style={animation}>
+            {console.log(allDatoCmsAsset)}
             <List>
-                {pages.map(({ name, img, path }, index, array) => {
+                {pages.map(({ name, img, path, src }, index, array) => {
                     const FirstElementRef = index === 0 ? { ref: FirstRef } : {};
                     const LastElementRef = index === array.length - 1 ? { ref: LastRef } : {}
+                    const imageSrc = allDatoCmsAsset.edges.filter(({ node }) => (
+                        node.basename === img
+                    ))[0].node.fluid
+                    console.log(imageSrc);
                     return (
                         <ListElement modifiers={modifiers} key={path} onKeyDown={handleKeyDown}>
                             <StyledLink modifiers={modifiers}
@@ -237,7 +259,10 @@ const Navigation = ({ className, animation, modifiers, open = true, toggleOpen =
                                 {...FirstElementRef}
                                 {...LastElementRef}
                             >
-                                <img className="LinkImg" src={img} alt={name} />
+                                <div className="LinkImg">
+                                    <Img fluid={imageSrc} alt={name} style={{ 'width': '100%', 'height': '100%;' }} />
+                                </div>
+
                                 <span className="LinkSpan">{name}</span>
                             </StyledLink>
                         </ListElement>
@@ -261,8 +286,7 @@ export default styled(Navigation)`
     align-items: center;
     flex-direction: column;
     z-index: 10;
-    ${
-    above.small`
+    ${above.small`
     flex-direction: row;
     justify-content: flex-start;
     height:auto;
@@ -280,6 +304,3 @@ Navigation.defaultProps = {
     show: false
 }
 
-
-
-// ${({ stick }) => stick ? NavStylesIfStick : NavStylesIfStatic};

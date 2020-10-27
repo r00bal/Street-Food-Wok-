@@ -17,20 +17,13 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
-        path: `${__dirname}/src/images`,
+        path: `${__dirname}/src/components/assets/img`,
       },
     },
     {
       resolve: `gatsby-transformer-remark`,
 
     },
-    // {
-    //   resolve: `gatsby-source-googlemaps-static`,
-    //   options: {
-    //     key: process.env.GOOGLE_MAPS_API,
-    //     center: "Chicago, IL",
-    //   },
-    // },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {

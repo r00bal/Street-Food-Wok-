@@ -72,8 +72,7 @@ padding:0;
   .hambrugerRectangle {
   transition: all 0.3s ease;
   }
-  ${
-  above.small`
+  ${above.small`
   display:none;
     `}
  &:hover {
@@ -99,13 +98,9 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
 
   const refHeader = useRef();
   const refMenuButton = useRef();
-
   const [isNavOpen, setNavOpen] = useState(false);
   const [on, toggle] = useState(false)
   const [isBackgroundLoaded, setIsBackgroundLoaded] = useState(false)
-
-
-
   const { width: screenWidth } = useWindowSize();
   const { small: mobileScreenSizeBreakpoint } = size;
 
@@ -152,7 +147,6 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
 
 
   // Animations
-
   // background scale out animation
   const { s } = useSpring({
     s: isBackgroundLoaded ? 1 : 1.2,
@@ -167,10 +161,7 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
     },
     config: config.stiff,
     delay: 500
-
   })
-
-
 
   // navigation animations
   const navAnimationDesktop = useSpring({

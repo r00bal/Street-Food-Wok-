@@ -152,16 +152,6 @@ const MenuPage = ({ location }) => {
   const [menuOption, setMenuOption] = useState('starters')
   const [checkedItems, setCheckedItems] = useState({})
 
-
-  // const trail = useTrail(items.length,
-  //   {
-
-  //     opacity: on ? 0 : 1,
-  //     transform: on ? 'scale(0.2)' : 'scale(1)'
-
-  //   }
-  // )
-
   const handleCheckboxChange = (e) => {
     const name = e.target.name;
     const isChecked = e.target.checked;
@@ -169,7 +159,6 @@ const MenuPage = ({ location }) => {
 
   }
   const checkIfChecked = (string) => {
-    // if (!anyIsTrue(checkedItems)) 
     for (const key in checkedItems) {
       if (checkedItems.hasOwnProperty(key)) {
         const element = checkedItems[key];
@@ -187,8 +176,6 @@ const MenuPage = ({ location }) => {
   return (
     <Layout location={location} stick="stick" headerTitle={"Menu"}>
       <SEO title="Menu Card" />
-      {/* <SlideIn> */}
-
       {windowWidth > size.med
         ?
         <StyledButtonList
@@ -197,8 +184,6 @@ const MenuPage = ({ location }) => {
           setState={setMenuOption}
         />
         : <StyledSelectList options={menu} state={menuOption} setState={setMenuOption} />}
-
-      {/* </SlideIn> */}
       <MenuWrapper>
 
         <MenuImage>

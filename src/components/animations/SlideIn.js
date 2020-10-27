@@ -15,7 +15,7 @@ const SlideIn = ({ children, cssProps, delay = 50, from = "down" }) => {
  const [isVisible, setIsVisible] = useState(false);
  const SlideFromBottom = useSpring({
   transform: isVisible ? 'translate3d(0,0,0)' : direction[from],
-  // opacity: isVisible ? 1 : 0,
+  opacity: isVisible ? 1 : 0,
   delay: delay,
   config: slowSlide
 
