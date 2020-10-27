@@ -33,8 +33,6 @@ transition: all 0.1s;
  transform:scale(1.1);
 } */
 `
-
-
 const Main = styled.main`
 z-index:2;
 background-color: #fff;
@@ -48,9 +46,7 @@ display: flex;
 flex-flow: column nowrap;
 justify-content: space-around;
 align-items: space-around;
-
 `
-
 const MenuButton = styled.button`
 appearance: none;
 margin:0;
@@ -153,7 +149,7 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
   const { y } = useSpring({
     y: 0,
     from: {
-      y: -500,
+      y: -800,
     },
     config: config.stiff,
     delay: 500
@@ -193,7 +189,6 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
         <>
 
           <Header>
-
             <animated.div style={{ position: 'absolute', width: '100%', height: '100%', transform: s.interpolate((s) => `scale(${s})`) }}>
               <BackgroundImageFixed
                 imgStyle={{ position: 'fixed' }}
