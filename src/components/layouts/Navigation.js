@@ -233,7 +233,7 @@ const Navigation = ({ className, animation, modifiers, open = true, toggleOpen =
 
     return (
         <animated.nav className={className} style={animation}>
-            {console.log(allDatoCmsAsset)}
+
             <List>
                 {pages.map(({ name, img, path, src }, index, array) => {
                     const FirstElementRef = index === 0 ? { ref: FirstRef } : {};

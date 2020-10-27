@@ -175,7 +175,7 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
   const image = DynamicQueryHeader(headerTitle) ? DynamicQueryHeader(headerTitle).headerImage.fluid : null;
   return (
     <>
-      <GlobalStyle />
+
 
       <MenuButton className="menu-button" onClick={() => setNavOpen(!isNavOpen)} ref={refMenuButton}>
         <MenuIcon open={isNavOpen} />
@@ -210,6 +210,7 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
 
             </Parallax>
           </Header>
+          <GlobalStyle />
         </>
       )
       }
