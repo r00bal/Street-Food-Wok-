@@ -4,7 +4,7 @@ import { textFont, focusOutline } from './components/utilities'
 
 const GlobalStyles = createGlobalStyle`
 ${normalize()};
-@import url('https://fonts.googleapis.com/css?family=Annie+Use+Your+Telescope|Fredericka+the+Great&display=swap');
+/* @import url('https://fonts.googleapis.com/css?family=Annie+Use+Your+Telescope|Fredericka+the+Great&display=swap'); */
 html {
   box-sizing: border-box;
 }
