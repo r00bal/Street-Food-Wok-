@@ -5,22 +5,16 @@ import PropTypes from "prop-types"
 import { Link } from 'gatsby'
 import Img from "gatsby-image"
 import { applyStyleModifiers } from 'styled-components-modifiers'
-import book from '../assets/img/book.png'
-import delivery from '../assets/img/delivery.png'
-import localisation from '../assets/img/localisation.png'
-import noodlebox from '../assets/img/noodlebox.png'
-import polaroid from '../assets/img/polaroid.png'
-import veggies from '../assets/img/veggies.png'
 import styled from 'styled-components'
-import { headerFont, transparentBlack, elevation, fixed, above } from '../utilities'
+import { transparentBlack, elevation, fixed, above } from '../utilities'
 
 const pages = [
-    { name: 'home', path: '', img: "veggies", src: veggies },
-    { name: 'menu', path: 'menu', img: "noodlebox", src: noodlebox },
-    { name: 'our story', path: 'ourstory', img: "book", src: book },
-    { name: 'gallery', path: 'gallery', img: "polaroid", src: polaroid },
-    { name: 'order', path: 'order', img: "delivery", src: delivery },
-    { name: 'find us', path: 'findus', img: "localisation", src: localisation }
+    { name: 'home', path: '', img: "veggies", },
+    { name: 'menu', path: 'menu', img: "noodlebox", },
+    { name: 'our story', path: 'ourstory', img: "book", },
+    { name: 'gallery', path: 'gallery', img: "polaroid", },
+    { name: 'order', path: 'order', img: "delivery", },
+    { name: 'find us', path: 'findus', img: "localisation", }
 ]
 
 const NAV_MODIFIERS = {
@@ -98,35 +92,35 @@ const LIST_MODIFIERS = {
     `
 }
 
-const Logo = styled.h3`
-margin:0;
-color:white;
-opacity:0.6;
-width:100%;
-height:80px;
-display:flex;
-justify-content:center;
-align-items:center;
-transform: translate(-3%,25%);
-position:relative;
-${headerFont};
-span {
-    width:120px;
-    position:absolute;
-    bottom:-10px;
-    ${above.small`
-            width:50px;
-            position:absolute;
-            bottom:0;
-            transform: translate(-15px,0px) rotate(20deg);
-            `} 
-}
-${above.small`
-        width:100px;
-        transform: translate(0%,0%);
-        position:absolute;
-        `} 
-`
+// const Logo = styled.h3`
+// margin:0;
+// color:white;
+// opacity:0.6;
+// width:100%;
+// height:80px;
+// display:flex;
+// justify-content:center;
+// align-items:center;
+// transform: translate(-3%,25%);
+// position:relative;
+// ${headerFont};
+// span {
+//     width:120px;
+//     position:absolute;
+//     bottom:-10px;
+//     ${above.small`
+//             width:50px;
+//             position:absolute;
+//             bottom:0;
+//             transform: translate(-15px,0px) rotate(20deg);
+//             `} 
+// }
+// ${above.small`
+//         width:100px;
+//         transform: translate(0%,0%);
+//         position:absolute;
+//         `} 
+// `
 
 const StyledLink = styled(Link)`
        text-decoration: none;
@@ -195,7 +189,7 @@ const Navigation = ({ className, animation, modifiers, open = true, toggleOpen =
       node {
         id
         basename
-        fluid(maxWidth: 80) {
+        fluid(maxWidth: 70) {
          ...GatsbyDatoCmsFluid_noBase64
           
         }
@@ -207,7 +201,6 @@ const Navigation = ({ className, animation, modifiers, open = true, toggleOpen =
 
     const [active, setActive] = useState(null)
     const [key, setKey] = useState()
-    const [imgLoaded, setImgLoaded] = useState({})
 
     const FirstRef = useRef();
     const LastRef = useRef();
@@ -235,7 +228,7 @@ const Navigation = ({ className, animation, modifiers, open = true, toggleOpen =
             LastRef.current.focus()
         }
 
-    }, [active]);
+    }, [active, mobile, key]);
 
 
     return (

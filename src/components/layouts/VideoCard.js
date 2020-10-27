@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 import VideoBackground from '../VideoBackground';
 import { Card } from '../elements'
-import { useSpring, useTrail, animated, config } from 'react-spring'
 
 const CardWrapper = styled(Card)`
 height:450px;

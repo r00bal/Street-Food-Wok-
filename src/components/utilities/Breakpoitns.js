@@ -1,7 +1,7 @@
 import { css } from 'styled-components';
 
 export const size = {
-  small: 520,
+  small: 548,
   med: 960,
   large: 1140
 }

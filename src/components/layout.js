@@ -7,21 +7,18 @@
 import React, { useState, useRef, useEffect } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import GlobalStyle from '../Global'
 import BackgroundImage from 'gatsby-background-image-es5'
 import { useSpring, config, animated } from 'react-spring'
 import { Waypoint } from 'react-waypoint'
 import Parallax from './hooks/Parallax'
-import { SlideIn } from './animations'
 import { useWindowSize } from './hooks/useWindowSize'
 import { Container, Header, Heading, MenuIcon } from './elements'
 import { Navigation, Footer, Contact } from './layouts'
 import { DynamicQueryHeader, above, size } from './utilities'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import Img from "gatsby-image"
-import WokAnimation from './animations/WokAnimation'
 library.add(fab)
 
 const BackgroundImageFixed = styled(BackgroundImage)`
@@ -96,7 +93,6 @@ const Layout = ({ children, location, headerTitle, staticHeader }) => {
     }
   `)
 
-  const refHeader = useRef();
   const refMenuButton = useRef();
   const [isNavOpen, setNavOpen] = useState(false);
   const [on, toggle] = useState(false)

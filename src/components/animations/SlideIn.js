@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Waypoint } from 'react-waypoint';
-import { useSpring, config, animated } from 'react-spring'
+import { useSpring, animated } from 'react-spring'
 
 const slowSlide = { mass: 5, tension: 80, friction: 60 };
 

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import GoogleMapReact from 'google-map-react';
 import styled from 'styled-components';
 import { headerFont } from '../utilities'
@@ -31,7 +31,7 @@ function GoogleMap() {
           lng="18.550399"
         >
           <StyledMarker>
-            <img src={localization} className="MarkerImg" />
+            <img src={localization} alt="localisation" className="MarkerImg" />
       STREET WOK</StyledMarker>
 
         </Marker>

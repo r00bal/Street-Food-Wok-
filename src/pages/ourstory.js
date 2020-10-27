@@ -1,6 +1,5 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import { Link } from "gatsby"
 import { useWindowSize } from '../components/hooks/useWindowSize'
 import { size } from '../components/utilities'
 import { above } from '../components/utilities'

@@ -4,7 +4,6 @@ import { ContentBox } from "../components/layouts"
 import { Visible, AnimatedImage, ShowElementTrial } from '../components/animations'
 import { above } from '../components/utilities'
 import { Card } from '../components/elements'
-import Image from '../components/image'
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
@@ -35,7 +34,7 @@ const Index = ({ location }) => {
       <SEO title="Street Food Wok" />
       {allDatoCmsCard.edges.map(({ node }, index) => {
         const { id, title, copy, cta, url, image } = node;
-        const reverse = index % 2 === 0;
+        //const reverse = index % 2 === 0;
         return (
           <ContentBox
             key={id}

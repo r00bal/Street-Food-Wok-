@@ -1,9 +1,6 @@
 import React from "react"
-import { Link } from "gatsby"
 import { Card } from "../components/elements"
-import styled, { css } from 'styled-components'
-import { above } from '../components/utilities'
-import { SlideIn } from '../components/animations'
+import { css } from 'styled-components'
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 

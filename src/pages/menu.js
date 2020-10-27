@@ -1,9 +1,7 @@
 import React, { useState } from "react"
 import { useStaticQuery, graphql } from 'gatsby'
-import { Link } from "gatsby"
-import { Waypoint } from 'react-waypoint';
 import styled from 'styled-components'
-import { useTrail, config, animated } from 'react-spring'
+import { animated } from 'react-spring'
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { useWindowSize } from '../components/hooks/useWindowSize'
@@ -76,30 +74,29 @@ margin-bottom:5rem;`
 
 
 const StyledButtonList = ({ options, state, setState }) => {
-  const [isVisible, setIsVisible] = useState(false)
 
   return (
-    <Waypoint onEnter={() => setIsVisible(true)}>
-      <StyledList>
-        {menu.map((option) => {
-          return (
 
-            <li id="menu">
-              <Button modifiers="D3"
-                value={option}
-                active={option === state}
-                onClick={(e) => {
-                  setState(e.target.value)
-                }}
-              >
-                {option}
-              </Button>
-            </li>
-          )
-        }
-        )}
-      </StyledList>
-    </Waypoint>
+    <StyledList>
+      {menu.map((option) => {
+        return (
+
+          <li id="menu">
+            <Button modifiers="D3"
+              value={option}
+              active={option === state}
+              onClick={(e) => {
+                setState(e.target.value)
+              }}
+            >
+              {option}
+            </Button>
+          </li>
+        )
+      }
+      )}
+    </StyledList>
+
   )
 }
 
@@ -216,7 +213,7 @@ const MenuPage = ({ location }) => {
                       <Card.CardBody> {node.ingredients}</Card.CardBody>
                     </Card.CardRowItem>
                   )
-                }
+                } else { return null }
               })}
             </Card.CardRow>
           </Card>

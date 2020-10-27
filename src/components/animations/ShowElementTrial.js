@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
-import { Waypoint } from 'react-waypoint';
-import { useSpring, useTrail, animated, config } from 'react-spring'
+import React from 'react'
+import { useTrail, animated, config } from 'react-spring'
 
-const manualConfig = { mass: 5, tension: 80, friction: 60 };
+//const manualConfig = { mass: 5, tension: 80, friction: 60 };
 
 const ShowElementTrial = ({ children, isVisible }) => {
 

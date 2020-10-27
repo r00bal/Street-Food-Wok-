@@ -1,6 +1,6 @@
 import React, { useState } from "react"
-import styled, { css } from 'styled-components';
-import { useSpring, config, animated } from 'react-spring'
+import styled from 'styled-components';
+import { useSpring, animated } from 'react-spring'
 import { Waypoint } from 'react-waypoint';
 import Img from "gatsby-image"
 

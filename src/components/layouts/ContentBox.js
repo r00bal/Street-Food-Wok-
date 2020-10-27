@@ -1,8 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Card } from '../elements'
 import { above } from '../utilities'
-import Image from '../image'
 
 export const CardWrapper = styled.div`
 position:relative;

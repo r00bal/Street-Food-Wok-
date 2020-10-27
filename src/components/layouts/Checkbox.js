@@ -2,7 +2,7 @@
 import React from "react"
 import styled from 'styled-components';
 import { Input } from '../elements'
-import { textFont, grey, darkGrey, focusOutline } from '../utilities'
+import { textFont, grey, darkGrey } from '../utilities'
 import { applyStyleModifiers, applyResponsiveStyleModifiers } from 'styled-components-modifiers'
 
 
@@ -88,7 +88,7 @@ const Checkbox = ({ label, value, name, checked = false, handleChange }) => (
 
 
 export default styled(Checkbox)`
-${ textFont};
-${ applyStyleModifiers(CHECKBOX_MODIFIERS)};
-${ applyResponsiveStyleModifiers(CHECKBOX_MODIFIERS)}
+${textFont};
+${applyStyleModifiers(CHECKBOX_MODIFIERS)};
+${applyResponsiveStyleModifiers(CHECKBOX_MODIFIERS)}
 `
