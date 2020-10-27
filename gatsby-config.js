@@ -60,16 +60,6 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-google-fonts`,
-      options: {
-        fonts: [
-          `Annie Use Your Telescope`,
-          `Fredericka the Great`// you can also specify font weights and styles
-        ],
-        display: 'swap'
-      }
-    },
-    {
       resolve: `gatsby-plugin-polished`
     },
     `gatsby-plugin-anchor-links`,
