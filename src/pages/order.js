@@ -25,7 +25,7 @@ align-self: center;
         Make an order and we will delivery
         your favourite dishes right into your place
     </Card.CardBody>
-      <Card.CardLinkButton modifiers="wide" href="https://wolt.com/pl/">
+      <Card.CardLinkButton modifiers="wide" to="https://wolt.com/pl/">
         ORDER
     </Card.CardLinkButton>
     </Card>

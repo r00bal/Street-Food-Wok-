@@ -15,7 +15,3 @@ export const above = Object.keys(size).reduce((acc, label) => {
     `
   return acc;
 }, {});
-
-console.log(
-  'above', above
-);

@@ -100,7 +100,7 @@ const Contact = ({ className }) => {
                 <h2>GET SOCIAL</h2>
                 <SocialIconWrapper>
                     {getSocial.map(({ icon, url }) => (
-                        <StyledIconLink href={url} target="_blank">
+                        <StyledIconLink key={icon[1]} href={url} target="_blank">
                             <AwesomeIcon to={url} icon={icon} />
                         </StyledIconLink>
                     ))}

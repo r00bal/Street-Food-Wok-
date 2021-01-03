@@ -22,7 +22,7 @@ export const MenuIcon = ({ open }) => {
  })
  return (
   <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 100">
-   <rect id="Rectangle" class="hambrugerRectangle" width="100" height="100" fill="#fc3350" />
+   <rect id="Rectangle" className="hambrugerRectangle" width="100" height="100" fill="#fc3350" />
    <g id="lines">
     <animated.rect id="Rectangle1" width="45" height="8" transform={top} fill="#f8f8f8" />
     <animated.rect id="Rectangle2" width="45" height="8" transform={center} fill="#f8f8f8" />

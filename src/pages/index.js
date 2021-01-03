@@ -54,7 +54,7 @@ const Index = ({ location }) => {
                     <Card.CardHeader>
                       {title}
                     </Card.CardHeader>
-                    {console.log(isVisible)}
+                  
                     <Card.CardBody>
                       {copy}
                     </Card.CardBody>

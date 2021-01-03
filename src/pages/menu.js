@@ -80,11 +80,10 @@ const StyledButtonList = ({ options, state, setState }) => {
     <StyledList>
       {menu.map((option) => {
         return (
-
-          <li id="menu">
+          <li id="menu" key={option}>
             <Button modifiers="D3"
               value={option}
-              active={option === state}
+              active={option === state ? "true" : null}
               onClick={(e) => {
                 setState(e.target.value)
               }}
@@ -201,14 +200,14 @@ const MenuPage = ({ location }) => {
             width:100%;
     `}>
             <Card.CardMenu>
-              {tags.map(({ name, value }) => <Checkbox name={name} value={value} label={name} checked={checkedItems[name]} handleChange={handleCheckboxChange} />)}
+              {tags.map(({ name, value }) => <Checkbox key={name} name={name} value={value} label={name} checked={checkedItems[name]} handleChange={handleCheckboxChange} />)}
             </Card.CardMenu>
             <Card.CardRow>
               {edges.map(({ node }) => {
                 const { category, tag } = node;
                 if (category === menuOption) {
                   return (
-                    <Card.CardRowItem modifiers={anyIsTrue(checkedItems) ? !checkIfChecked(tag) && 'transparent' : ''}>
+                    <Card.CardRowItem key={node.name} modifiers={anyIsTrue(checkedItems) ? !checkIfChecked(tag) && 'transparent' : ''}>
                       <Card.CardHeader modifiers={["textFont", "red", anyIsTrue(checkedItems) ? checkIfChecked(tag) && "green" : '']}>{node.name}</Card.CardHeader>
                       <Card.CardBody> {node.ingredients}</Card.CardBody>
                     </Card.CardRowItem>

@@ -241,7 +241,7 @@ const Navigation = ({ className, animation, modifiers, open = true, toggleOpen =
                     const imageSrc = allDatoCmsAsset.edges.filter(({ node }) => (
                         node.basename === img
                     ))[0].node.fluid
-                    console.log(imageSrc);
+                  
                     return (
                         <ListElement modifiers={modifiers} key={path} onKeyDown={handleKeyDown}>
                             <StyledLink modifiers={modifiers}
@@ -253,7 +253,7 @@ const Navigation = ({ className, animation, modifiers, open = true, toggleOpen =
                                 {...LastElementRef}
                             >
                                 <div className="LinkImg">
-                                    <Img fluid={imageSrc} alt={name} style={{ 'width': '100%', 'height': '100%;' }} />
+                                    <Img fluid={imageSrc} alt={name} style={{ 'width': '100%' }} />
                                 </div>
 
                                 <span className="LinkSpan">{name}</span>

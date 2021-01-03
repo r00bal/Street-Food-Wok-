@@ -19,7 +19,7 @@ const ShowElementTrial = ({ children, isVisible }) => {
   <>
    {/* {elements.map(el => React.cloneElement(el, { style: { opacity: 0.1 } }))} */}
    {trail.map(({ x, height, ...rest }, index) => (
-    <animated.div style={{ ...rest, transform: x.interpolate(x => `translate3d(0,${x}px,0)`) }} >
+    <animated.div key={index} style={{ ...rest, transform: x.interpolate(x => `translate3d(0,${x}px,0)`) }} >
      {elements[index]}
     </animated.div>
 

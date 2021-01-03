@@ -32,7 +32,7 @@ const Gallery = ({ location }) => {
   const { edges } = allDatoCmsAsset;
   return (
     <Layout location={location} stick="stick" headerTitle="Gallery">
-      {console.log(edges)}
+     
       <SEO title="Gallery" />
       <GalleryWrapper>
         {
@@ -41,7 +41,7 @@ const Gallery = ({ location }) => {
             const eachFour = index % (arr.length / 2);
             const portraitOrientation = eachFour % 3 === 0;
             return (
-              <AnimatedImage fluid={fluid} cssProps={`  
+              <AnimatedImage key={`${fluid.src}`} fluid={fluid} cssProps={`  
               flex: 50% 50%;
               align-self:center;
               width:100%;
