@@ -65,7 +65,7 @@ const Index = ({ location }) => {
                 </Card>
               )}
             </Visible>
-            <AnimatedImage fluid={image.fluid} delay={700} cssProps={`
+            <AnimatedImage fluid={image.fluid} delay={200} cssProps={`
             width:100%; 
             max-width:500px; 
             z-index:1; 
